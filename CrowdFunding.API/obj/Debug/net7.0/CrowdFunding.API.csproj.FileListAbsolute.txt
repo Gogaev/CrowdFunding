@@ -38,3 +38,8 @@ C:\project\CrowdFunding\CrowdFunding.API\obj\Debug\net7.0\refint\CrowdFunding.AP
 C:\project\CrowdFunding\CrowdFunding.API\obj\Debug\net7.0\CrowdFunding.API.pdb
 C:\project\CrowdFunding\CrowdFunding.API\obj\Debug\net7.0\CrowdFunding.API.genruntimeconfig.cache
 C:\project\CrowdFunding\CrowdFunding.API\obj\Debug\net7.0\ref\CrowdFunding.API.dll
+C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\Humanizer.dll
+C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\System.CodeDom.dll
