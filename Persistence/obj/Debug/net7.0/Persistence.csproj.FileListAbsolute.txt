@@ -1,0 +1,14 @@
+C:\project\CrowdFunding\Persistence\bin\Debug\net7.0\Persistence.deps.json
+C:\project\CrowdFunding\Persistence\bin\Debug\net7.0\Persistence.runtimeconfig.json
+C:\project\CrowdFunding\Persistence\bin\Debug\net7.0\Persistence.dll
+C:\project\CrowdFunding\Persistence\bin\Debug\net7.0\Persistence.pdb
+C:\project\CrowdFunding\Persistence\obj\Debug\net7.0\Persistence.csproj.AssemblyReference.cache
+C:\project\CrowdFunding\Persistence\obj\Debug\net7.0\Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\project\CrowdFunding\Persistence\obj\Debug\net7.0\Persistence.AssemblyInfoInputs.cache
+C:\project\CrowdFunding\Persistence\obj\Debug\net7.0\Persistence.AssemblyInfo.cs
+C:\project\CrowdFunding\Persistence\obj\Debug\net7.0\Persistence.csproj.CoreCompileInputs.cache
+C:\project\CrowdFunding\Persistence\obj\Debug\net7.0\Persistence.dll
+C:\project\CrowdFunding\Persistence\obj\Debug\net7.0\refint\Persistence.dll
+C:\project\CrowdFunding\Persistence\obj\Debug\net7.0\Persistence.pdb
+C:\project\CrowdFunding\Persistence\obj\Debug\net7.0\Persistence.genruntimeconfig.cache
+C:\project\CrowdFunding\Persistence\obj\Debug\net7.0\ref\Persistence.dll
