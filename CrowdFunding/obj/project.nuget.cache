@@ -1,15 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "XxlZt/F/wVMYxRmpTgJzNf3RRPBs/y0zDjJjmU1zuzZg88xqdxFUlyKSuY8FBdTLfIg9ma1oBwWvtZpf4JRL1w==",
-  "success": true,
+  "dgSpecHash": "GkJTE9TgFCpSQmmWrmBCA7e7NOg3H4aICn17qd9WBloIUtb7/t0CLlMxmMh+2h/8lC4P0gui2vdfxGiOxShCnQ==",
+  "success": false,
   "projectFilePath": "C:\\project\\CrowdFunding\\CrowdFunding\\CrowdFunding.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
-  ],
-  "logs": []
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project Persistence is not compatible with net6.0 (.NETCoreApp,Version=v6.0). Project Persistence supports: net7.0 (.NETCoreApp,Version=v7.0)",
+      "libraryId": "Persistence",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }
