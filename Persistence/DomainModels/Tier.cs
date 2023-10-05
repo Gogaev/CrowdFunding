@@ -7,7 +7,7 @@
         public decimal RequiredMoney { get; set; }
         public string Benefit { get; set; }
         public bool IsReached { get; set; }
-        public int PoejectId { get; set; }
+        public int ProjectId { get; set; }
         public Project Project { get; set; }
     }
 }

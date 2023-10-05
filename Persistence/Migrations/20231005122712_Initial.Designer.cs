@@ -6,13 +6,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
+using Persistence.Context;
 
 #nullable disable
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231004104201_Initial")]
+    [Migration("20231005122712_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -80,9 +81,6 @@ namespace Persistence.Migrations
 
                     b.Property<bool>("IsReached")
                         .HasColumnType("boolean");
-
-                    b.Property<int>("PoejectId")
-                        .HasColumnType("integer");
 
                     b.Property<int>("ProjectId")
                         .HasColumnType("integer");

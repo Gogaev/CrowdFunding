@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "5X+kD3bMM1Nm6NMxWVe7FxsoeJGoYCEUcHUevsCcC5rsR8KxAh0rXumuNsEe5lonPtYmGDeVVI9eAdaVjoQiug==",
+  "dgSpecHash": "RBGDOpqq3NeulOwpeA2QPvDG5WTnJdtD3Yg7Tqoze8aIimqiGZCgs/RVNgwM0lZoXhDTMoVf5r8pihnWjRDG/Q==",
   "success": true,
   "projectFilePath": "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.11\\microsoft.entityframeworkcore.7.0.11.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.11\\microsoft.entityframeworkcore.abstractions.7.0.11.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.11\\microsoft.entityframeworkcore.analyzers.7.0.11.nupkg.sha512",

@@ -43,3 +43,5 @@ C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\Microsoft.EntityFramew
 C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\Mono.TextTemplating.dll
 C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\System.CodeDom.dll
+C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\MediatR.dll
+C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\MediatR.Contracts.dll

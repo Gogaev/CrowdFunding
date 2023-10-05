@@ -2,9 +2,9 @@
 using Npgsql;
 using Persistence.DomainModels;
 
-namespace Persistence
+namespace Persistence.Context
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -20,6 +20,11 @@ namespace Persistence
         {
             builder.HasPostgresEnum<Status>();
             base.OnModelCreating(builder);
+        }
+
+        public async Task<int> SaveChanges()
+        {
+            return await base.SaveChangesAsync();
         }
 
         public DbSet<Project> Projects { get; set; }

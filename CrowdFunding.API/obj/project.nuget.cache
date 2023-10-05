@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "hS2dIzHRbBN28ZXrn8utsnArTy1OE6LpvfccEjQFgFqqRoRPuKCOXWZ/eUK1B97EropKEXD7lqKqTVmgv4u/mQ==",
+  "dgSpecHash": "PuoGiIigtuPD8vn0niRmEB3LfnhpXOgLY9U2hrgpE64p1o5WYO7gxMA5nuPWcnHk/Yqlc1t4hn7O29Z1D03d/A==",
   "success": true,
   "projectFilePath": "C:\\project\\CrowdFunding\\CrowdFunding.API\\CrowdFunding.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.11\\microsoft.aspnetcore.openapi.7.0.11.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.11\\microsoft.entityframeworkcore.7.0.11.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.11\\microsoft.entityframeworkcore.abstractions.7.0.11.nupkg.sha512",

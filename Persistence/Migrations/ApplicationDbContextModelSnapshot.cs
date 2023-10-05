@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
+using Persistence.Context;
 
 #nullable disable
 
@@ -77,9 +78,6 @@ namespace Persistence.Migrations
 
                     b.Property<bool>("IsReached")
                         .HasColumnType("boolean");
-
-                    b.Property<int>("PoejectId")
-                        .HasColumnType("integer");
 
                     b.Property<int>("ProjectId")
                         .HasColumnType("integer");
