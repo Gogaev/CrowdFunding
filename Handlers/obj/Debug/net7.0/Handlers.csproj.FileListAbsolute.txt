@@ -1,0 +1,15 @@
+C:\project\CrowdFunding\Handlers\bin\Debug\net7.0\Handlers.deps.json
+C:\project\CrowdFunding\Handlers\bin\Debug\net7.0\Handlers.dll
+C:\project\CrowdFunding\Handlers\bin\Debug\net7.0\Handlers.pdb
+C:\project\CrowdFunding\Handlers\bin\Debug\net7.0\Persistence.dll
+C:\project\CrowdFunding\Handlers\bin\Debug\net7.0\Persistence.pdb
+C:\project\CrowdFunding\Handlers\obj\Debug\net7.0\Handlers.csproj.AssemblyReference.cache
+C:\project\CrowdFunding\Handlers\obj\Debug\net7.0\Handlers.GeneratedMSBuildEditorConfig.editorconfig
+C:\project\CrowdFunding\Handlers\obj\Debug\net7.0\Handlers.AssemblyInfoInputs.cache
+C:\project\CrowdFunding\Handlers\obj\Debug\net7.0\Handlers.AssemblyInfo.cs
+C:\project\CrowdFunding\Handlers\obj\Debug\net7.0\Handlers.csproj.CoreCompileInputs.cache
+C:\project\CrowdFunding\Handlers\obj\Debug\net7.0\Handlers.csproj.CopyComplete
+C:\project\CrowdFunding\Handlers\obj\Debug\net7.0\Handlers.dll
+C:\project\CrowdFunding\Handlers\obj\Debug\net7.0\refint\Handlers.dll
+C:\project\CrowdFunding\Handlers\obj\Debug\net7.0\Handlers.pdb
+C:\project\CrowdFunding\Handlers\obj\Debug\net7.0\ref\Handlers.dll

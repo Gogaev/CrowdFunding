@@ -1,13 +1,9 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Persistence;
 using Persistence.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Persistence.Features.ProjectFeatures.Commands
+namespace Handlers.Features.ProjectFeatures.Commands
 {
     public class UpdateProjectCommand : IRequest<int>
     {

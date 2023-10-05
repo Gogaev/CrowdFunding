@@ -524,6 +524,20 @@
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
       },
+      "Handlers/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "MediatR": "12.1.1",
+          "Persistence": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Handlers.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Handlers.dll": {}
+        }
+      },
       "Persistence/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -1512,6 +1526,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Handlers/1.0.0": {
+      "type": "project",
+      "path": "../Handlers/Handlers.csproj",
+      "msbuildProject": "../Handlers/Handlers.csproj"
+    },
     "Persistence/1.0.0": {
       "type": "project",
       "path": "../Persistence/Persistence.csproj",
@@ -1520,6 +1539,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Handlers >= 1.0.0",
       "MediatR >= 12.1.1",
       "Microsoft.AspNetCore.OpenApi >= 7.0.11",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.11",
@@ -1560,6 +1580,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+            "C:\\project\\CrowdFunding\\Handlers\\Handlers.csproj": {
+              "projectPath": "C:\\project\\CrowdFunding\\Handlers\\Handlers.csproj"
+            },
             "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj": {
               "projectPath": "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj"
             }

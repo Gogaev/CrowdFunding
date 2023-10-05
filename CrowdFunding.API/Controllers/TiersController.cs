@@ -1,7 +1,7 @@
-﻿using MediatR;
+﻿using Handlers.Features.TierFeature.Commands;
+using Handlers.Features.TierFeature.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Persistence.Features.TierFeature.Commands;
-using Persistence.Features.TierFeature.Queries;
 
 namespace CrowdFunding.API.Controllers
 {

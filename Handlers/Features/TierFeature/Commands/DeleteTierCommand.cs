@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 
-namespace Persistence.Features.TierFeature.Commands
+namespace Handlers.Features.TierFeature.Commands
 {
     public class DeleteTierCommand : IRequest<int>
     {

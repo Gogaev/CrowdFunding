@@ -45,3 +45,5 @@ C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\Mono.TextTemplating.dl
 C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\System.CodeDom.dll
 C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\MediatR.dll
 C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\MediatR.Contracts.dll
+C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\Handlers.dll
+C:\project\CrowdFunding\CrowdFunding.API\bin\Debug\net7.0\Handlers.pdb

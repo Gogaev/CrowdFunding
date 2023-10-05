@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Persistence.DomainModels;
 
-namespace Persistence.Features.TierFeature.Queries
+namespace Handlers.Features.TierFeature.Queries
 {
     public class GetTierByIdQuary : IRequest<Tier>
     {

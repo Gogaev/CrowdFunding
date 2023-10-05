@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Persistence.DomainModels;
 
-namespace Persistence.Features.ProjectFeatures.Queries
+namespace Handlers.Features.ProjectFeatures.Queries
 {
     public class GetProjectByIdQuery : IRequest<Project>
     {

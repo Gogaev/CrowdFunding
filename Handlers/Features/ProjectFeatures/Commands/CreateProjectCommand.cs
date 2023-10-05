@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using Persistence;
 using Persistence.Context;
 using Persistence.DomainModels;
 
-namespace Persistence.Features.ProjectFeatures.Commands
+namespace Handlers.Features.ProjectFeatures.Commands
 {
     public class CreateProjectCommand : IRequest<int>
     {

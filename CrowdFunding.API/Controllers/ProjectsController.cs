@@ -1,7 +1,7 @@
-﻿using MediatR;
+﻿using Handlers.Features.ProjectFeatures.Commands;
+using Handlers.Features.ProjectFeatures.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Persistence.Features.ProjectFeatures.Commands;
-using Persistence.Features.ProjectFeatures.Queries;
 
 namespace CrowdFunding.API.Controllers
 {

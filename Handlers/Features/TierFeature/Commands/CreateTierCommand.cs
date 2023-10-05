@@ -2,7 +2,7 @@
 using Persistence.Context;
 using Persistence.DomainModels;
 
-namespace Persistence.Features.TierFeature.Commands
+namespace Handlers.Features.TierFeature.Commands
 {
     public class CreateTierCommand : IRequest<int>
     {
