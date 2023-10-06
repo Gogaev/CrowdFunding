@@ -1,9 +1,9 @@
-﻿using MediatR;
+﻿using Domain.DomainModels;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Persistence;
 using Persistence.Context;
 
-namespace Handlers.Features.ProjectFeatures.Commands
+namespace Domain.Features.ProjectFeatures.Commands
 {
     public class UpdateProjectCommand : IRequest<int>
     {

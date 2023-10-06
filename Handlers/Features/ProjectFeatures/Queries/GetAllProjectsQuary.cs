@@ -1,9 +1,9 @@
-﻿using MediatR;
+﻿using Domain.DomainModels;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
-using Persistence.DomainModels;
 
-namespace Handlers.Features.ProjectFeatures.Queries
+namespace Domain.Features.ProjectFeatures.Queries
 {
     public class GetAllProjectsQuary : IRequest<IEnumerable<Project>>
     {

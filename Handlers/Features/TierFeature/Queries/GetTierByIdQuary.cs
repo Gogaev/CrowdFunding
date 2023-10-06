@@ -1,9 +1,9 @@
-﻿using MediatR;
+﻿using Domain.DomainModels;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
-using Persistence.DomainModels;
 
-namespace Handlers.Features.TierFeature.Queries
+namespace Domain.Features.TierFeature.Queries
 {
     public class GetTierByIdQuary : IRequest<Tier>
     {

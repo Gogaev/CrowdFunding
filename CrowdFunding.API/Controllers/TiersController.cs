@@ -1,5 +1,5 @@
-﻿using Handlers.Features.TierFeature.Commands;
-using Handlers.Features.TierFeature.Queries;
+﻿using Domain.Features.TierFeature.Commands;
+using Domain.Features.TierFeature.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

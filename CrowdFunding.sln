@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrowdFunding.API", "CrowdFunding.API\CrowdFunding.API.csproj", "{65541724-3862-49F7-84F0-6A4AC5C37E0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Handlers", "Handlers\Handlers.csproj", "{5EF01F2C-A409-4F3F-90F9-DC4ADF0C8A95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Handlers\Domain.csproj", "{5EF01F2C-A409-4F3F-90F9-DC4ADF0C8A95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

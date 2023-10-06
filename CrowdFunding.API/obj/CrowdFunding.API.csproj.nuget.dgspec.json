@@ -33,8 +33,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\project\\CrowdFunding\\Handlers\\Handlers.csproj": {
-                "projectPath": "C:\\project\\CrowdFunding\\Handlers\\Handlers.csproj"
+              "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj": {
+                "projectPath": "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj"
               },
               "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj": {
                 "projectPath": "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj"
@@ -94,12 +94,12 @@
         }
       }
     },
-    "C:\\project\\CrowdFunding\\Handlers\\Handlers.csproj": {
+    "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\project\\CrowdFunding\\Handlers\\Handlers.csproj",
-        "projectName": "Handlers",
-        "projectPath": "C:\\project\\CrowdFunding\\Handlers\\Handlers.csproj",
+        "projectUniqueName": "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
         "outputPath": "C:\\project\\CrowdFunding\\Handlers\\obj\\",
         "projectStyle": "PackageReference",
@@ -122,11 +122,7 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {
-              "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj": {
-                "projectPath": "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -192,7 +188,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj": {
+                "projectPath": "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

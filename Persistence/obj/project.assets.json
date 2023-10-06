@@ -429,6 +429,19 @@
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
+      },
+      "Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "MediatR": "12.1.1"
+        },
+        "compile": {
+          "bin/placeholder/Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Domain.dll": {}
+        }
       }
     }
   },
@@ -1077,10 +1090,16 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Domain/1.0.0": {
+      "type": "project",
+      "path": "../Handlers/Domain.csproj",
+      "msbuildProject": "../Handlers/Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Domain >= 1.0.0",
       "MediatR >= 12.1.1",
       "Microsoft.EntityFrameworkCore >= 7.0.11",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.11",
@@ -1120,7 +1139,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj": {
+              "projectPath": "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

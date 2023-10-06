@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using System.Text.Json.Serialization;
-using static Handlers.Features.ProjectFeatures.Commands.UpdateProjectCommand;
+using static Domain.Features.ProjectFeatures.Commands.UpdateProjectCommand;
 
 var builder = WebApplication.CreateBuilder(args);
 

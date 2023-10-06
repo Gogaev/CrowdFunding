@@ -1,5 +1,5 @@
-﻿using Handlers.Features.ProjectFeatures.Commands;
-using Handlers.Features.ProjectFeatures.Queries;
+﻿using Domain.Features.ProjectFeatures.Commands;
+using Domain.Features.ProjectFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

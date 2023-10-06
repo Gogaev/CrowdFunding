@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 
-namespace Handlers.Features.ProjectFeatures.Commands
+namespace Domain.Features.ProjectFeatures.Commands
 {
     public class DeleteProjectCommand : IRequest<int>
     {

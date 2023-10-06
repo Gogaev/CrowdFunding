@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.DomainModels;
+using Microsoft.EntityFrameworkCore;
 using Npgsql;
-using Persistence.DomainModels;
 
 namespace Persistence.Context
 {
@@ -29,6 +29,5 @@ namespace Persistence.Context
 
         public DbSet<Project> Projects { get; set; }
         public DbSet<Tier> Tiers { get; set; }
-
     }
 }

@@ -1,9 +1,8 @@
-﻿using MediatR;
-using Persistence;
+﻿using Domain.DomainModels;
+using MediatR;
 using Persistence.Context;
-using Persistence.DomainModels;
 
-namespace Handlers.Features.ProjectFeatures.Commands
+namespace Domain.Features.ProjectFeatures.Commands
 {
     public class CreateProjectCommand : IRequest<int>
     {
