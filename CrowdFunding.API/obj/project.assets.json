@@ -528,7 +528,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "MediatR": "12.1.1"
+          "MediatR": "12.1.1",
+          "Microsoft.EntityFrameworkCore": "7.0.11"
         },
         "compile": {
           "bin/placeholder/Domain.dll": {}
@@ -1554,11 +1555,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\project\\CrowdFunding\\CrowdFunding.API\\CrowdFunding.API.csproj",
+      "projectUniqueName": "C:\\project\\Project\\CrowdFunding.API\\CrowdFunding.API.csproj",
       "projectName": "CrowdFunding.API",
-      "projectPath": "C:\\project\\CrowdFunding\\CrowdFunding.API\\CrowdFunding.API.csproj",
+      "projectPath": "C:\\project\\Project\\CrowdFunding.API\\CrowdFunding.API.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\project\\CrowdFunding\\CrowdFunding.API\\obj\\",
+      "outputPath": "C:\\project\\Project\\CrowdFunding.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1580,11 +1581,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj": {
-              "projectPath": "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj"
+            "C:\\project\\Project\\Handlers\\Domain.csproj": {
+              "projectPath": "C:\\project\\Project\\Handlers\\Domain.csproj"
             },
-            "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj": {
-              "projectPath": "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj"
+            "C:\\project\\Project\\Persistence\\Persistence.csproj": {
+              "projectPath": "C:\\project\\Project\\Persistence\\Persistence.csproj"
             }
           }
         }

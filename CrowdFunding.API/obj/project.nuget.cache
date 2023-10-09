@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JUyTBPfTChgqLXpZ93yukLlGqXCDTMSvLKDtNIWbn7b6winjwNIl/exbaaQYkemlVJXA8Tgd1iFSSKj4NtobwA==",
+  "dgSpecHash": "0t4PvSACMxgXuuVe7OWWTAHF50MwQ3e9zHkcRil+OXWtfyvl4f+32VG2l8mTADvq1TzbyWQSJl21FrZStS5QwA==",
   "success": true,
-  "projectFilePath": "C:\\project\\CrowdFunding\\CrowdFunding.API\\CrowdFunding.API.csproj",
+  "projectFilePath": "C:\\project\\Project\\CrowdFunding.API\\CrowdFunding.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",

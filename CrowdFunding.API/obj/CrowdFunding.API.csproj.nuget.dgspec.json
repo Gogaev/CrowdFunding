@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\project\\CrowdFunding\\CrowdFunding.API\\CrowdFunding.API.csproj": {}
+    "C:\\project\\Project\\CrowdFunding.API\\CrowdFunding.API.csproj": {}
   },
   "projects": {
-    "C:\\project\\CrowdFunding\\CrowdFunding.API\\CrowdFunding.API.csproj": {
+    "C:\\project\\Project\\CrowdFunding.API\\CrowdFunding.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\project\\CrowdFunding\\CrowdFunding.API\\CrowdFunding.API.csproj",
+        "projectUniqueName": "C:\\project\\Project\\CrowdFunding.API\\CrowdFunding.API.csproj",
         "projectName": "CrowdFunding.API",
-        "projectPath": "C:\\project\\CrowdFunding\\CrowdFunding.API\\CrowdFunding.API.csproj",
+        "projectPath": "C:\\project\\Project\\CrowdFunding.API\\CrowdFunding.API.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\project\\CrowdFunding\\CrowdFunding.API\\obj\\",
+        "outputPath": "C:\\project\\Project\\CrowdFunding.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,11 +33,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj": {
-                "projectPath": "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj"
+              "C:\\project\\Project\\Handlers\\Domain.csproj": {
+                "projectPath": "C:\\project\\Project\\Handlers\\Domain.csproj"
               },
-              "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj": {
-                "projectPath": "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj"
+              "C:\\project\\Project\\Persistence\\Persistence.csproj": {
+                "projectPath": "C:\\project\\Project\\Persistence\\Persistence.csproj"
               }
             }
           }
@@ -94,14 +94,14 @@
         }
       }
     },
-    "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj": {
+    "C:\\project\\Project\\Handlers\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj",
+        "projectUniqueName": "C:\\project\\Project\\Handlers\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj",
+        "projectPath": "C:\\project\\Project\\Handlers\\Domain.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\project\\CrowdFunding\\Handlers\\obj\\",
+        "outputPath": "C:\\project\\Project\\Handlers\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -138,6 +138,10 @@
             "MediatR": {
               "target": "Package",
               "version": "[12.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.11, )"
             }
           },
           "imports": [
@@ -160,14 +164,14 @@
         }
       }
     },
-    "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj": {
+    "C:\\project\\Project\\Persistence\\Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj",
+        "projectUniqueName": "C:\\project\\Project\\Persistence\\Persistence.csproj",
         "projectName": "Persistence",
-        "projectPath": "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj",
+        "projectPath": "C:\\project\\Project\\Persistence\\Persistence.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\project\\CrowdFunding\\Persistence\\obj\\",
+        "outputPath": "C:\\project\\Project\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -189,8 +193,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj": {
-                "projectPath": "C:\\project\\CrowdFunding\\Handlers\\Domain.csproj"
+              "C:\\project\\Project\\Handlers\\Domain.csproj": {
+                "projectPath": "C:\\project\\Project\\Handlers\\Domain.csproj"
               }
             }
           }

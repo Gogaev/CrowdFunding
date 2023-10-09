@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain.DomainModels;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;

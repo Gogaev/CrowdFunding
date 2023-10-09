@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MK5iPmSPZyGUdOAiy5bmc7ZiA1t5vcGrcNn/f1kFSCSXP6/WeLaOnnCLtSrZPAdT6cdqm1Olf1zKd+wcJqz7vw==",
+  "dgSpecHash": "j0n1p6f7q5il4mqHm0CBxO8hLl+/HTqIeY6VA7fz+Q31xKBRsQGGlo66MEY5kzPHtrATWrbZWeQTWe+OVy1XYA==",
   "success": true,
-  "projectFilePath": "C:\\project\\CrowdFunding\\Persistence\\Persistence.csproj",
+  "projectFilePath": "C:\\project\\Project\\Persistence\\Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
