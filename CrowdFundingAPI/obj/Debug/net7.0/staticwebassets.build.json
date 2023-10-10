@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "BJUYnnZeq9Rz8MFYW504hhsbbm2jdM1jnZNeLO0uul4=",
+  "Source": "CrowdFundingAPI",
+  "BasePath": "_content/CrowdFundingAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
