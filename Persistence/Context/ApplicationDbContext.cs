@@ -3,10 +3,12 @@ using Domain.DomainModels;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence.Context
 {
-    public class ApplicationDbContext : DbContext, IApplicationDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>, IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

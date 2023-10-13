@@ -1,6 +1,7 @@
 ﻿using Domain.Features.TierFeature.Commands;
 using Domain.Features.TierFeature.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrowdFundingAPI.Controllers
@@ -10,37 +11,45 @@ namespace CrowdFundingAPI.Controllers
     public class TiersController : ControllerBase
     {
         private IMediator _mediator;
-        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+        public TiersController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateTierCommand command)
         {
-            return Ok(await Mediator.Send(command));
+            return Ok(await _mediator.Send(command));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await Mediator.Send(new GetAllTiersQuary()));
+            return Ok(await _mediator.Send(new GetAllTiersQuary()));
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            return Ok(await Mediator.Send(new GetTierByIdQuary { Id = id }));
+            return Ok(await _mediator.Send(new GetTierByIdQuary { Id = id }));
         }
+
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            return Ok(await Mediator.Send(new DeleteTierCommand { Id = id }));
+            return Ok(await _mediator.Send(new DeleteTierCommand { Id = id }));
         }
+
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> Update(int id, UpdateTierCommand command)
         {
             if (id != command.Id)
             {
                 return BadRequest();
             }
-            return Ok(await Mediator.Send(command));
+            return Ok(await _mediator.Send(command));
         }
     }
 }
