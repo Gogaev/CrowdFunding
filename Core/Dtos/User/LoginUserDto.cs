@@ -1,9 +1,8 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Domain.DomainModels
+namespace Core.Dtos.User
 {
-    public class LoginModel
+    public class LoginUserDto
     {
         [Required(ErrorMessage = "User Name is required")]
         public string? Username { get; set; }

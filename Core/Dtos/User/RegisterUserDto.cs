@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Domain.DomainModels
+namespace Core.Dtos.User
 {
-    public class RegisterModel
+    public class RegisterUserDto
     {
         [Required(ErrorMessage = "User name is required!")]
         public string? UserName { get; set; }

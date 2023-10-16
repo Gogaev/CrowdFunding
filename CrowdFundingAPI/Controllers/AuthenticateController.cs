@@ -1,4 +1,5 @@
-﻿using Domain.DomainModels;
+﻿using Core.Dtos.User;
+using Domain.DomainModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -28,7 +29,7 @@ namespace CrowdFundingAPI.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        public async Task<IActionResult> Login([FromBody] LoginUserDto model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
@@ -58,7 +59,7 @@ namespace CrowdFundingAPI.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        public async Task<IActionResult> Register([FromBody] RegisterUserDto model)
         {
             var userExists = await _userManager.FindByNameAsync(model.UserName);
             if (userExists != null)
@@ -90,7 +91,7 @@ namespace CrowdFundingAPI.Controllers
 
         [HttpPost]
         [Route("register-admin")]
-        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterUserDto model)
         {
             var userExists = await _userManager.FindByNameAsync(model.UserName);
             if (userExists != null)
