@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.TierFeature.Queries
 {
-    public class GetTierByIdQuary : IRequest<GetTierByIdDto?>
+    public class GetTierByIdQuary : IRequest<TierDto?>
     {
         public int Id { get; set; }
-        public class GetTierByIdQueryHandler : IRequestHandler<GetTierByIdQuary, GetTierByIdDto?>
+        public class GetTierByIdQueryHandler : IRequestHandler<GetTierByIdQuary, TierDto?>
         {
             private readonly IApplicationDbContext _context;
             private readonly IMapper _mapper;
@@ -19,14 +19,14 @@ namespace Domain.Features.TierFeature.Queries
                 _context = context;
                 _mapper = mapper;
             }
-            public async Task<GetTierByIdDto?> Handle(GetTierByIdQuary request, CancellationToken cancellationToken)
+            public async Task<TierDto?> Handle(GetTierByIdQuary request, CancellationToken cancellationToken)
             {
                 var tier = await _context.Tiers.FirstOrDefaultAsync(x => x.Id == request.Id);
                 if (tier == null)
                 {
                     return null;
                 }
-                return _mapper.Map<GetTierByIdDto>(tier);
+                return _mapper.Map<TierDto>(tier);
             }
         }
     }

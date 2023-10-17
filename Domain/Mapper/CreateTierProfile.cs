@@ -1,6 +1,8 @@
-﻿using AutoMapper;
-using Core.Dtos.Tier;
+﻿
+
+using AutoMapper;
 using Domain.DomainModels;
+using Domain.Features.TierFeature.Commands;
 
 namespace Domain.Mapper
 {
@@ -8,15 +10,19 @@ namespace Domain.Mapper
     {
         public CreateTierProfile()
         {
-            CreateMap<CreateTierDto, Tier>()
-                .ForMember(t => t.TierName,
-                ctd => ctd.MapFrom(src => src.TierName))
-                .ForMember(t => t.RequiredMoney,
-                ctd => ctd.MapFrom(src => src.RequiredMoney))
-                .ForMember(t => t.Benefit,
-                ctd => ctd.MapFrom(src => src.Benefit))
-                .ForMember(t => t.ProjectId,
-                ctd => ctd.MapFrom(src => src.ProjectId));
+            CreateMap<CreateTierCommand, Tier>()
+                .ForMember(dest =>
+                    dest.TierName,
+                    opt => opt.MapFrom(src => src.TierName))
+                .ForMember(dest =>
+                    dest.Benefit,
+                    opt => opt.MapFrom(src => src.Benefit))
+                .ForMember(dest =>
+                    dest.RequiredMoney,
+                    opt => opt.MapFrom(src => src.RequiredMoney))
+                .ForMember(dest =>
+                    dest.ProjectId,
+                    opt => opt.MapFrom(src => src.ProjectId));
         }
     }
 }

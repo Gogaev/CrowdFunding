@@ -10,8 +10,8 @@ namespace Domain.Extentions
         {
             var mapperConfig = new MapperConfiguration(mc =>
             {
+                mc.AddProfile(new TierProfile());
                 mc.AddProfile(new CreateTierProfile());
-                mc.AddProfile(new GetTierByIdProfile());
             });
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
