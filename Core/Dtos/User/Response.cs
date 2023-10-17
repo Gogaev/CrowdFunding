@@ -1,5 +1,4 @@
-﻿
-namespace Domain.DomainModels
+﻿namespace Core.Dtos.User
 {
     public class Response
     {

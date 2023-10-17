@@ -1,28 +1,32 @@
-﻿using Domain.Abstract;
-using Domain.DomainModels;
+﻿using AutoMapper;
+using Core.Dtos.Tier;
+using Domain.Abstract;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.TierFeature.Queries
 {
-    public class GetTierByIdQuary : IRequest<Tier>
+    public class GetTierByIdQuary : IRequest<GetTierByIdDto?>
     {
         public int Id { get; set; }
-        public class GetTierByIdQueryHandler : IRequestHandler<GetTierByIdQuary, Tier>
+        public class GetTierByIdQueryHandler : IRequestHandler<GetTierByIdQuary, GetTierByIdDto?>
         {
             private readonly IApplicationDbContext _context;
-            public GetTierByIdQueryHandler(IApplicationDbContext context)
+            private readonly IMapper _mapper;
+
+            public GetTierByIdQueryHandler(IApplicationDbContext context, IMapper mapper)
             {
                 _context = context;
+                _mapper = mapper;
             }
-            public async Task<Tier> Handle(GetTierByIdQuary request, CancellationToken cancellationToken)
+            public async Task<GetTierByIdDto?> Handle(GetTierByIdQuary request, CancellationToken cancellationToken)
             {
                 var tier = await _context.Tiers.FirstOrDefaultAsync(x => x.Id == request.Id);
                 if (tier == null)
                 {
                     return null;
                 }
-                return tier;
+                return _mapper.Map<GetTierByIdDto>(tier);
             }
         }
     }

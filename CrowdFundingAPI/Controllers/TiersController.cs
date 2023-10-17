@@ -1,4 +1,5 @@
-﻿using Domain.Features.TierFeature.Commands;
+﻿using Core.Dtos.User;
+using Domain.Features.TierFeature.Commands;
 using Domain.Features.TierFeature.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -31,7 +32,16 @@ namespace CrowdFundingAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            return Ok(await _mediator.Send(new GetTierByIdQuary { Id = id }));
+            var result = await _mediator.Send(new GetTierByIdQuary { Id = id });
+            if(result is not null)
+            {
+                return Ok(result);
+            }
+            if(result is null)
+            {
+                return NotFound(new Response { Status = "Error", Message = "Can't find user with this id" });
+            }
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]

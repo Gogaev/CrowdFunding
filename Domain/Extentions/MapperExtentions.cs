@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Core.Mapper;
+using Domain.Mapper;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Core.Extentions
+namespace Domain.Extentions
 {
     public static class MapperExtentions
     {
@@ -11,6 +11,7 @@ namespace Core.Extentions
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new CreateTierProfile());
+                mc.AddProfile(new GetTierByIdProfile());
             });
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
