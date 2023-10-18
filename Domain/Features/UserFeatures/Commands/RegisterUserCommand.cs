@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Dtos.User
 {
-    public class RegisterUserCommand
+    public class RegisterUserCommand : IRequest<Response>
     {
         [Required(ErrorMessage = "User name is required!")]
         public string? UserName { get; set; }
