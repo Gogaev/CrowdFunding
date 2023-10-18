@@ -1,5 +1,9 @@
-﻿using Core.Dtos.User;
+﻿using Core.Dtos;
+using Core.Dtos.User;
 using Domain.DomainModels;
+using Domain.Features.ProjectFeatures.Queries;
+using Domain.Features.UserFeatures.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -16,15 +20,30 @@ namespace CrowdFundingAPI.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly IMediator _mediator;
 
         public AuthenticateController(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IMediator mediator)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            _mediator = mediator;
+        }
+        [HttpGet]
+        [Route("getUsers")]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await _mediator.Send(new GetUsersQuery()));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            return Ok(await _mediator.Send(new GetUserByIdQuery(id)));
         }
 
         [HttpPost]
@@ -60,7 +79,7 @@ namespace CrowdFundingAPI.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserDto model)
+        public async Task<IActionResult> Register([FromBody] RegisterUserCommand model)
         {
             var userExists = await _userManager.FindByNameAsync(model.UserName);
             if (userExists != null)
@@ -94,7 +113,7 @@ namespace CrowdFundingAPI.Controllers
 
         [HttpPost]
         [Route("register-admin")]
-        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterUserDto model)
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterUserCommand model)
         {
             var userExists = await _userManager.FindByNameAsync(model.UserName);
             if (userExists != null)

@@ -1,4 +1,4 @@
-﻿namespace Core.Dtos.User
+﻿namespace Core.Dtos
 {
     public class Response
     {

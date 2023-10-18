@@ -2,7 +2,7 @@
 
 namespace Core.Dtos.User
 {
-    public class RegisterUserDto
+    public class RegisterUserCommand
     {
         [Required(ErrorMessage = "User name is required!")]
         public string? UserName { get; set; }

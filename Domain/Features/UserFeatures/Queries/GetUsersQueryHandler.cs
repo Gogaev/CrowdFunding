@@ -1,24 +1,35 @@
 ﻿using AutoMapper;
+using Core.Dtos.Tier;
 using Core.Dtos.User;
 using Domain.Abstract;
+using Domain.DomainModels;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.UserFeatures.Queries
 {
     public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, IEnumerable<UserDto>?>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
 
-        public GetUsersQueryHandler(IApplicationDbContext context, IMapper mapper)
+        public GetUsersQueryHandler(IMapper mapper, UserManager<ApplicationUser> userManager)
         {
-            _context = context;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
-        public Task<IEnumerable<UserDto>?> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<UserDto>?> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var userLits = _mapper.Map<List<ApplicationUser>, List<UserDto>>(await _userManager.Users
+                .Include(x => x.CreatedProjects)
+                .ToListAsync());
+            if (userLits == null)
+            {
+                return null;
+            }
+            return userLits.AsReadOnly();
         }
     }
 }

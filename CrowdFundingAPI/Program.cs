@@ -1,5 +1,4 @@
 using Domain.Abstract;
-using static Domain.Features.ProjectFeatures.Commands.UpdateProjectCommand;
 using System.Text.Json.Serialization;
 using Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +9,7 @@ using System.Text;
 using Domain.Extentions;
 using Domain.DomainModels;
 using Domain.Services;
+using Domain.Features.ProjectFeatures.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -42,7 +42,7 @@ namespace CrowdFundingAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            return Ok(await _mediator.Send(new DeleteProjectCommand { Id = id }));
+            return Ok(await _mediator.Send(new DeleteProjectCommand(id)));
         }
 
         [HttpPut("{id}")]

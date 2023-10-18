@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using Core.Dtos.Tier;
-using Domain.Abstract;
+﻿using Core.Dtos.Tier;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.TierFeature.Queries
 {

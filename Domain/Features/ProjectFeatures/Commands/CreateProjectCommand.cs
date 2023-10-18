@@ -1,44 +1,14 @@
-﻿using Domain.Abstract;
-using Domain.DomainModels;
+﻿using Core.Dtos;
 using MediatR;
 
 namespace Domain.Features.ProjectFeatures.Commands
 {
-    public class CreateProjectCommand : IRequest<int>
-    {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string ImageUrl { get; set; }
-        public DateTime StartingDay { get; set; }
-        public DateTime LastDay { get; set; }
-        public decimal RequiredMoney { get; set; }
-
-        public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, int>
-        {
-            private readonly IApplicationDbContext _context;
-            private readonly IUserService _userService;
-            public CreateProjectCommandHandler(IApplicationDbContext context, IUserService userService)
-            {
-                _context = context;
-                _userService = userService;
-            }
-
-            public async Task<int> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
-            {
-                var project = new Project();
-                project.Title = request.Title;
-                project.Description = request.Description;
-                project.ImageUrl = request.ImageUrl;
-                project.Status = Status.Draft;
-                project.StartingDay = request.StartingDay;
-                project.LastDay = request.LastDay;
-                project.RequiredMoney = request.RequiredMoney;
-                project.InvestedMoney = 0;
-                project.CreatorId = _userService.GetUserId();
-                _context.Projects.Add(project);
-                await _context.SaveChanges();
-                return project.Id;
-            }
-        }
-    }
+    public record CreateProjectCommand(
+        string Title,
+        string Description,
+        string ImageUrl,
+        DateTime StartingDay,
+        DateTime LastDay,
+        decimal RequiredMoney
+        ) : IRequest<Response>;
 }

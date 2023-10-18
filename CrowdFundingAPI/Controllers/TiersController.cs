@@ -1,4 +1,4 @@
-﻿using Core.Dtos.User;
+﻿using Core.Dtos;
 using Domain.Features.TierFeature.Commands;
 using Domain.Features.TierFeature.Queries;
 using MediatR;

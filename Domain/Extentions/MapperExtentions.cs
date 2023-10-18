@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Mapper.TierMapping;
+using Domain.Mapper.UserMapping;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Domain.Extentions
@@ -13,6 +14,7 @@ namespace Domain.Extentions
                 mc.AddProfile(new TierProfile());
                 mc.AddProfile(new CreateTierProfile());
                 mc.AddProfile(new UpdateTierProfile());
+                mc.AddProfile(new UserProfile());
             });
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
