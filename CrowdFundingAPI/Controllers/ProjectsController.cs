@@ -1,8 +1,11 @@
-﻿using Domain.Features.ProjectFeatures.Commands;
+﻿using Domain.DomainModels;
+using Domain.Features.ProjectFeatures.Commands;
 using Domain.Features.ProjectFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CrowdFundingAPI.Controllers
 {
@@ -10,8 +13,8 @@ namespace CrowdFundingAPI.Controllers
     [ApiController]
     public class ProjectsController : ControllerBase
     {
-        private IMediator _mediator;
-        public ProjectsController(IMediator mediator)
+        private readonly IMediator _mediator;
+        public ProjectsController(IMediator mediator, UserManager<ApplicationUser> userManager)
         {
             _mediator = mediator;
         }
@@ -25,7 +28,7 @@ namespace CrowdFundingAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            return Ok(await _mediator.Send(new GetProjectByIdQuery { Id = id }));
+            return Ok(await _mediator.Send(new GetProjectByIdQuery(id)));
         }
 
         [HttpPost]

@@ -1,28 +1,7 @@
-﻿using Domain.Abstract;
-using Domain.DomainModels;
+﻿using Core.Dtos.Tier;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.TierFeature.Queries
 {
-    public class GetAllTiersQuary : IRequest<IEnumerable<Tier>>
-    {
-        public class GetAllTiersQueryHandler : IRequestHandler<GetAllTiersQuary, IEnumerable<Tier>>
-        {
-            private readonly IApplicationDbContext _context;
-            public GetAllTiersQueryHandler(IApplicationDbContext context)
-            {
-                _context = context;
-            }
-            public async Task<IEnumerable<Tier>> Handle(GetAllTiersQuary request, CancellationToken cancellationToken)
-            {
-                var tierList = await _context.Tiers.ToListAsync();
-                if (tierList == null)
-                {
-                    return null;
-                }
-                return tierList.AsReadOnly();
-            }
-        }
-    }
+    public record GetAllTiersQuary() : IRequest<IEnumerable<TierDto>?>;
 }

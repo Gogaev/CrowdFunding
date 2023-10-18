@@ -12,7 +12,10 @@ namespace Domain.DomainModels
         public DateTime LastDay { get; set; }
         public decimal RequiredMoney { get; set; }
         public decimal InvestedMoney { get; set; }
-        public ICollection<Tier> Tiers { get; set; } = new List<Tier>();
+        public List<Tier> Tiers { get; set; } = new List<Tier>();
+        public string? CreatorId { get; set; }
+        public ApplicationUser? Creator{ get; set; }
+        public List<ApplicationUser> Supporters { get; set; } = new List<ApplicationUser>();
 
     }
 }

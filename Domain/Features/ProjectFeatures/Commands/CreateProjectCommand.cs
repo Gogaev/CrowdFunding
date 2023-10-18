@@ -16,9 +16,11 @@ namespace Domain.Features.ProjectFeatures.Commands
         public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, int>
         {
             private readonly IApplicationDbContext _context;
-            public CreateProjectCommandHandler(IApplicationDbContext context)
+            private readonly IUserService _userService;
+            public CreateProjectCommandHandler(IApplicationDbContext context, IUserService userService)
             {
                 _context = context;
+                _userService = userService;
             }
 
             public async Task<int> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
@@ -32,6 +34,7 @@ namespace Domain.Features.ProjectFeatures.Commands
                 project.LastDay = request.LastDay;
                 project.RequiredMoney = request.RequiredMoney;
                 project.InvestedMoney = 0;
+                project.CreatorId = _userService.GetUserId();
                 _context.Projects.Add(project);
                 await _context.SaveChanges();
                 return project.Id;

@@ -1,12 +1,6 @@
-﻿using Domain.Abstract;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
 
 namespace Domain.Features.TierFeature.Commands
 {
-    public class DeleteTierCommand : IRequest<int>
-    {
-        public int Id { get; set; }
-        
-    }
+    public record DeleteTierCommand(int Id) : IRequest<int>;
 }

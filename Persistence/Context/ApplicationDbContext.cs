@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Persistence.Context
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>, IApplicationDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -22,6 +22,9 @@ namespace Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            builder.ApplyConfiguration(new ProjectConfiguration());
+            builder.ApplyConfiguration(new TierConfiguration());
             builder.HasPostgresEnum<Status>();
             base.OnModelCreating(builder);
         }

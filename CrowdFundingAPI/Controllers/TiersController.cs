@@ -29,10 +29,11 @@ namespace CrowdFundingAPI.Controllers
         {
             return Ok(await _mediator.Send(new GetAllTiersQuary()));
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var result = await _mediator.Send(new GetTierByIdQuary { Id = id });
+            var result = await _mediator.Send(new GetTierByIdQuary(id));
             if(result is not null)
             {
                 return Ok(result);
@@ -48,7 +49,7 @@ namespace CrowdFundingAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            return Ok(await _mediator.Send(new DeleteTierCommand { Id = id }));
+            return Ok(await _mediator.Send(new DeleteTierCommand(id)));
         }
 
         [HttpPut("{id}")]

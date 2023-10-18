@@ -2,7 +2,7 @@
 using Core.Dtos.Tier;
 using Domain.DomainModels;
 
-namespace Domain.Mapper
+namespace Domain.Mapper.TierMapping
 {
     public class TierProfile : Profile
     {

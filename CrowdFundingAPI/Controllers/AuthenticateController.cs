@@ -13,12 +13,12 @@ namespace CrowdFundingAPI.Controllers
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
 
         public AuthenticateController(
-            UserManager<IdentityUser> userManager,
+            UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             IConfiguration configuration)
         {
@@ -39,6 +39,7 @@ namespace CrowdFundingAPI.Controllers
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim("UserId", user.Id),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
 
@@ -67,8 +68,10 @@ namespace CrowdFundingAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
             }
 
-            IdentityUser user = new()
+            ApplicationUser user = new()
             {
+                FullName = model.FullName,
+                Description = model.Description,
                 Email = model.EmailAddress,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.UserName,
@@ -97,31 +100,47 @@ namespace CrowdFundingAPI.Controllers
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
 
-            IdentityUser user = new()
+            ApplicationUser user = new()
             {
                 Email = model.EmailAddress,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.UserName
             };
+
             var result = await _userManager.CreateAsync(user, model.Password);
+
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response 
+                    {
+                        Status = "Error", Message = "User creation failed! Please check user details and try again." 
+                    });
+            }
 
             if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+            {
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+            }
+
             if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+            {
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+            }
 
             if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.Admin);
             }
+
             if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
             }
+
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
+
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
             var authSignedKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));

@@ -1,10 +1,8 @@
-﻿
-
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.DomainModels;
 using Domain.Features.TierFeature.Commands;
 
-namespace Domain.Mapper
+namespace Domain.Mapper.TierMapping
 {
     public class CreateTierProfile : Profile
     {

@@ -23,11 +23,9 @@ namespace Persistence.Context
                 .IsRequired();
 
             builder.Property(p => p.LastDay)
-                .HasColumnType("datetime2")
                 .IsRequired();
 
             builder.Property(p => p.StartingDay)
-                .HasColumnType("datetime2")
                 .IsRequired();
 
             builder.Property(p => p.RequiredMoney)
