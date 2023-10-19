@@ -46,7 +46,7 @@ namespace Domain.Features.UserFeatures.Commands
 
                 return new Response { 
                     Status = ResponseStatus.Success,
-                    Message = "token = " + new JwtSecurityTokenHandler().WriteToken(token) + " Expiration = " + token.ValidTo
+                    Message = new JwtSecurityTokenHandler().WriteToken(token)+","+token.ValidTo
                 };
             }
             return new Response { Status = ResponseStatus.Unauthorized, Message = "Name or password is wrong" };

@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using Core.Dtos.Tier;
 using Core.Dtos.User;
-using Domain.Abstract;
 using Domain.DomainModels.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -22,14 +20,14 @@ namespace Domain.Features.UserFeatures.Queries
 
         public async Task<IEnumerable<UserDto>?> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
-            var userLits = _mapper.Map<List<ApplicationUser>, List<UserDto>>(await _userManager.Users
+            var userList = _mapper.Map<List<ApplicationUser>, List<UserDto>>(await _userManager.Users
                 .Include(x => x.CreatedProjects)
                 .ToListAsync());
-            if (userLits == null)
+            if (userList == null)
             {
                 return null;
             }
-            return userLits.AsReadOnly();
+            return userList.AsReadOnly();
         }
     }
 }

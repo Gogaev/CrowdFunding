@@ -15,5 +15,7 @@ namespace Core.Dtos.User
         public string? EmailAddress { get; set; }
         [Required(ErrorMessage = "Password is required")]
         public string? Password { get; set; }
+        public string? AdminKey { get; set; }
+        public string? Role { get; set; }
     }
 }
