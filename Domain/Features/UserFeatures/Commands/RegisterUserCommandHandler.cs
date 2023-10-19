@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using Core.Dtos;
 using Core.Dtos.User;
-using Domain.DomainModels;
+using Domain.DomainModels.Entities;
+using Domain.DomainModels.Enums;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Domain.Features.UserFeatures.Commands
 {
@@ -24,25 +23,31 @@ namespace Domain.Features.UserFeatures.Commands
         {
             if(request.UserName == null || request.Password == null)
             {
-                return new Response { Status = "Error", Message = "Name or password is null" };
+                return new Response { Status = ResponseStatus.BadRequest, Message = "Name or password is null" };
             }
 
             var userExists = await _userManager.FindByNameAsync(request.UserName);
 
             if (userExists != null)
             {
-                return new Response { Status = "Error", Message = "User already exists!" };
+                return new Response { Status = ResponseStatus.BadRequest, Message = "User already exists!" };
             }
-            var user = _mapper.Map<ApplicationUser>(request);
+
+            var user = new ApplicationUser
+            {
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+
+            user =  _mapper.Map(request, user);
 
             var result = await _userManager.CreateAsync(user, request.Password);
 
             if (!result.Succeeded)
             {
-                return new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." };
+                return new Response { Status = ResponseStatus.InternalServerError, Message = "User creation failed! Please check user details and try again." };
             }
 
-            return new Response { Status = "Success", Message = "User created successfully!" };
+            return new Response { Status = ResponseStatus.Success, Message = "User created successfully!" };
         }
     }
 

@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Domain.Extentions;
-using Domain.DomainModels;
 using Domain.Services;
 using Domain.Features.ProjectFeatures.Commands;
+using Domain.DomainModels.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 

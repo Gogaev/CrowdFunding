@@ -2,6 +2,7 @@
 using Core.Dtos;
 using Domain.Abstract;
 using Domain.DomainModels;
+using Domain.DomainModels.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,13 +22,13 @@ public class UpdateTierCommandHandler : IRequestHandler<UpdateTierCommand, Respo
         var tier = await _context.Tiers.FirstOrDefaultAsync(x => x.Id == request.Id);
         if (tier == null)
         {
-            return default;
+            return new Response { Status = ResponseStatus.NotFound, Message = "Tier doesn't exist!" };
         }
         else
         {
-            _mapper.Map<UpdateTierCommand, Tier>(request, tier);
+            _mapper.Map(request, tier);
             await _context.SaveChanges();
-            return new Response { Status = "Success", Message = "Tier was updated successfully" };
+            return new Response { Status = ResponseStatus.Success, Message = "Tier was updated successfully" };
         }
     }
 }

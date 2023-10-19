@@ -1,6 +1,6 @@
-﻿using Domain.DomainModels;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Domain.DomainModels.Entities;
 
 namespace Persistence.Context
 {

@@ -1,4 +1,4 @@
-﻿using Domain.DomainModels;
+﻿using Domain.DomainModels.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

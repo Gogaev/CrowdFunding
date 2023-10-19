@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain;
+using Domain.DomainModels.Enums;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 

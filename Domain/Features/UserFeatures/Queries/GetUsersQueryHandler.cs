@@ -2,7 +2,7 @@
 using Core.Dtos.Tier;
 using Core.Dtos.User;
 using Domain.Abstract;
-using Domain.DomainModels;
+using Domain.DomainModels.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

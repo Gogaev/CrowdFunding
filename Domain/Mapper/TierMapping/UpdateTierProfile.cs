@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain.DomainModels;
+using Domain.DomainModels.Entities;
 using Domain.Features.TierFeature.Commands;
 
 namespace Domain.Mapper.TierMapping

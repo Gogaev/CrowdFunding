@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Core.Dtos.User;
-using Domain.DomainModels;
+using Domain.DomainModels.Entities;
 
 namespace Domain.Mapper.UserMapping
 {
@@ -8,7 +8,7 @@ namespace Domain.Mapper.UserMapping
     {
         public RegisterUserProfile()
         {
-            CreateMap<RegisterUserCommand, ApplicationUser > ()
+            CreateMap<RegisterUserCommand, ApplicationUser>()
                .ForMember(t =>
                    t.FullName,
                    ctd => ctd.MapFrom(src => src.FullName))
@@ -20,10 +20,7 @@ namespace Domain.Mapper.UserMapping
                    ctd => ctd.MapFrom(src => src.Description))
                .ForMember(t =>
                    t.Email,
-                   ctd => ctd.MapFrom(src => src.EmailAddress))
-               .ForMember(t =>
-                   t.SecurityStamp,
-                   ctd => ctd.MapFrom(Guid.NewGuid().ToString()));
+                   ctd => ctd.MapFrom(src => src.EmailAddress));
         }
     }
 }

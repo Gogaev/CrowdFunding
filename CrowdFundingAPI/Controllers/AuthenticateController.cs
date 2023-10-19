@@ -1,15 +1,12 @@
 ﻿using Core.Dtos;
 using Core.Dtos.User;
-using Domain.DomainModels;
+using Domain.DomainModels.Constants;
+using Domain.DomainModels.Entities;
+using Domain.DomainModels.Enums;
 using Domain.Features.UserFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CrowdFundingAPI.Controllers
 {
@@ -48,33 +45,9 @@ namespace CrowdFundingAPI.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginUserDto model)
+        public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
         {
-            var user = await _userManager.FindByNameAsync(model.Username);
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
-            {
-                var userRoles = await _userManager.GetRolesAsync(user);
-
-                var authClaims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim("UserId", user.Id),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                };
-
-                foreach (var userRole in userRoles)
-                {
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-                }
-                var token = GetToken(authClaims);
-
-                return Ok(new
-                {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
-                });
-            }
-            return Unauthorized();
+            return Ok(await _mediator.Send(command));
         }
 
         [HttpPost]
@@ -91,7 +64,7 @@ namespace CrowdFundingAPI.Controllers
         {
             var userExists = await _userManager.FindByNameAsync(model.UserName);
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = ResponseStatus.InternalServerError, Message = "User already exists!" });
 
             ApplicationUser user = new()
             {
@@ -107,7 +80,7 @@ namespace CrowdFundingAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new Response 
                     {
-                        Status = "Error", Message = "User creation failed! Please check user details and try again." 
+                        Status = ResponseStatus.InternalServerError, Message = "User creation failed! Please check user details and try again." 
                     });
             }
 
@@ -131,22 +104,7 @@ namespace CrowdFundingAPI.Controllers
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
             }
 
-            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
-        }
-
-        private JwtSecurityToken GetToken(List<Claim> authClaims)
-        {
-            var authSignedKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:ValidIssuer"],
-                audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.UtcNow.AddHours(3),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSignedKey, SecurityAlgorithms.HmacSha256)
-                );
-
-            return token;
+            return Ok(new Response { Status = ResponseStatus.Success, Message = "User created successfully!" });
         }
     }
 }

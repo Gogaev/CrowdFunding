@@ -1,5 +1,4 @@
-﻿
-namespace Domain.DomainModels
+﻿namespace Domain.DomainModels.Entities
 {
     public class Tier
     {

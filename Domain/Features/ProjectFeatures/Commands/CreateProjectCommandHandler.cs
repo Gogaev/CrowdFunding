@@ -1,6 +1,7 @@
 ﻿using Core.Dtos;
 using Domain.Abstract;
-using Domain.DomainModels;
+using Domain.DomainModels.Entities;
+using Domain.DomainModels.Enums;
 using MediatR;
 
 namespace Domain.Features.ProjectFeatures.Commands
@@ -29,7 +30,7 @@ namespace Domain.Features.ProjectFeatures.Commands
             project.CreatorId = _userService.GetUserId();
             _context.Projects.Add(project);
             await _context.SaveChanges();
-            return new Response { Status = "Success", Message = "Project was created successfully" };
+            return new Response { Status = ResponseStatus.Success, Message = "Project was created successfully" };
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using Domain.Abstract;
-using Domain.DomainModels;
-using Domain;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Domain.DomainModels.Entities;
+using Domain.DomainModels.Enums;
 
 namespace Persistence.Context
 {

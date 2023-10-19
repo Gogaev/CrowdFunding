@@ -15,6 +15,7 @@ namespace Domain.Extentions
                 mc.AddProfile(new CreateTierProfile());
                 mc.AddProfile(new UpdateTierProfile());
                 mc.AddProfile(new UserProfile());
+                mc.AddProfile(new RegisterUserProfile());
             });
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);

@@ -1,4 +1,5 @@
 ﻿using Core.Dtos;
+using Domain.DomainModels.Enums;
 using Domain.Features.TierFeature.Commands;
 using Domain.Features.TierFeature.Queries;
 using MediatR;
@@ -40,7 +41,7 @@ namespace CrowdFundingAPI.Controllers
             }
             if(result is null)
             {
-                return NotFound(new Response { Status = "Error", Message = "Can't find user with this id" });
+                return NotFound(new Response { Status = ResponseStatus.BadRequest, Message = "Can't find user with this id" });
             }
             return BadRequest();
         }

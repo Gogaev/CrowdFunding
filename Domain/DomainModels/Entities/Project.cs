@@ -1,5 +1,6 @@
-﻿
-namespace Domain.DomainModels
+﻿using Domain.DomainModels.Enums;
+
+namespace Domain.DomainModels.Entities
 {
     public class Project
     {
@@ -14,7 +15,7 @@ namespace Domain.DomainModels
         public decimal InvestedMoney { get; set; }
         public List<Tier> Tiers { get; set; } = new List<Tier>();
         public string? CreatorId { get; set; }
-        public ApplicationUser? Creator{ get; set; }
+        public ApplicationUser? Creator { get; set; }
         public List<ApplicationUser> Supporters { get; set; } = new List<ApplicationUser>();
 
     }

@@ -1,5 +1,4 @@
-﻿
-namespace Domain.DomainModels
+﻿namespace Domain.DomainModels.Constants
 {
     public static class UserRoles
     {

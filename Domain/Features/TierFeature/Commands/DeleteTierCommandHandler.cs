@@ -1,5 +1,6 @@
 ﻿using Core.Dtos;
 using Domain.Abstract;
+using Domain.DomainModels.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,11 +18,11 @@ namespace Domain.Features.TierFeature.Commands
             var tier = await _context.Tiers.FirstOrDefaultAsync(x => x.Id == request.Id);
             if (tier == null)
             {
-                return default;
+                return new Response { Status = ResponseStatus.NotFound, Message = "Tier doesn't exist!" };
             }
             _context.Tiers.Remove(tier);
             await _context.SaveChanges();
-            return new Response { Status = "Success", Message = "Tier was deleted successfully" };
+            return new Response { Status = ResponseStatus.Success, Message = "Tier was deleted successfully" };
         }
     }
 }

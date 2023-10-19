@@ -1,4 +1,4 @@
-﻿using Domain.DomainModels;
+﻿using Domain.DomainModels.Entities;
 using Domain.Features.ProjectFeatures.Commands;
 using Domain.Features.ProjectFeatures.Queries;
 using MediatR;

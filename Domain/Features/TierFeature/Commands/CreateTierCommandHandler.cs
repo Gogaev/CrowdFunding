@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Core.Dtos;
 using Domain.Abstract;
-using Domain.DomainModels;
+using Domain.DomainModels.Entities;
+using Domain.DomainModels.Enums;
 using MediatR;
 
 namespace Domain.Features.TierFeature.Commands
@@ -20,7 +21,7 @@ namespace Domain.Features.TierFeature.Commands
             var tier = _mapper.Map<Tier>(request);
             _context.Tiers.Add(tier);
             await _context.SaveChanges();
-            return new Response { Status = "Success", Message = "Tier was created successfully" };
+            return new Response { Status = ResponseStatus.Success, Message = "Tier was created successfully" };
         }
     }
 }

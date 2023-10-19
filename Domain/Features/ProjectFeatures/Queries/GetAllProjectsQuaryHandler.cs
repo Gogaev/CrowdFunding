@@ -1,5 +1,5 @@
 ﻿using Domain.Abstract;
-using Domain.DomainModels;
+using Domain.DomainModels.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
