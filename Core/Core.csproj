@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <Compile Remove="Dtos\Token\**" />
+    <EmbeddedResource Remove="Dtos\Token\**" />
+    <None Remove="Dtos\Token\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\Token\" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
 </Project>

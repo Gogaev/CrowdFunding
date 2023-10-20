@@ -1,11 +1,11 @@
-﻿using Domain.DomainModels.Entities;
+﻿using Core.Dtos.Project;
+using Domain.DomainModels.Entities;
 using Domain.Features.ProjectFeatures.Commands;
 using Domain.Features.ProjectFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace CrowdFundingAPI.Controllers
 {
@@ -35,7 +35,16 @@ namespace CrowdFundingAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Create(CreateProjectCommand command)
         {
-            return Ok(await _mediator.Send(command));
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost("support")]
+        [Authorize]
+        public async Task<IActionResult> SupportProject(SupportProjectCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]

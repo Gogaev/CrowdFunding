@@ -1,25 +1,32 @@
-﻿using Domain.Abstract;
-using Domain.DomainModels.Entities;
+﻿using AutoMapper;
+using Core.Dtos.Project;
+using Domain.Abstract;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.ProjectFeatures.Queries
 {
-    public class GetProjectByIdQueryHandler : IRequestHandler<GetProjectByIdQuery, Project>
+    public class GetProjectByIdQueryHandler : IRequestHandler<GetProjectByIdQuery, ProjectWithTiersDto?>
     {
         private readonly IApplicationDbContext _context;
-        public GetProjectByIdQueryHandler(IApplicationDbContext context)
+        private readonly IMapper _mapper;
+        public GetProjectByIdQueryHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
-        public async Task<Project> Handle(GetProjectByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ProjectWithTiersDto?> Handle(GetProjectByIdQuery request, CancellationToken cancellationToken)
         {
-            var project = await _context.Projects.Include(x => x.Tiers).FirstOrDefaultAsync(x => x.Id == request.Id);
+            var project = await _context.Projects.Include(x => x.Creator).Include(x => x.Tiers).FirstOrDefaultAsync(x => x.Id == request.Id);
+
+            var result = _mapper.Map<ProjectWithTiersDto>(project);
+
             if (project == null)
             {
                 return null;
             }
-            return project;
+
+            return result;
         }
     }
 }

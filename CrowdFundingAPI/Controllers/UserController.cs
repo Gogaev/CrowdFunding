@@ -1,4 +1,5 @@
 ﻿using Core.Dtos.User;
+using Domain.DomainModels.Constants;
 using Domain.Features.UserFeatures.Commands;
 using Domain.Features.UserFeatures.Queries;
 using MediatR;
@@ -29,7 +30,7 @@ namespace CrowdFundingAPI.Controllers
             }
             return Ok(result);
         }
-
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
@@ -65,9 +66,9 @@ namespace CrowdFundingAPI.Controllers
         {
             return Ok(await _mediator.Send(command));
         }
-
-        [HttpDelete("{id}")]
         [Authorize]
+        [HttpDelete("{id}")]
+       
         public async Task<IActionResult> Delete(string id)
         {
             return Ok(await _mediator.Send(new DeleteUserCommand(id)));

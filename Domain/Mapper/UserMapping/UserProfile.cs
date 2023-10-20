@@ -23,10 +23,7 @@ namespace Domain.Mapper.UserMapping
                     ctd => ctd.MapFrom(src => src.FullName))
                 .ForMember(t =>
                     t.Email,
-                    ctd => ctd.MapFrom(src => src.Email))
-                .ForMember(t =>
-                    t.CreatedProjects,
-                    ctd => ctd.MapFrom(src => src.CreatedProjects));
+                    ctd => ctd.MapFrom(src => src.Email));
         }
     }
 }

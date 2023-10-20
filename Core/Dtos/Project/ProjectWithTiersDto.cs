@@ -1,7 +1,8 @@
-﻿
+﻿using Core.Dtos.Tier;
+
 namespace Core.Dtos.Project
 {
-    public class ProjectDto
+    public class ProjectWithTiersDto
     {
         public int Id { get; set; }
         public string? Title { get; set; }
@@ -10,5 +11,6 @@ namespace Core.Dtos.Project
         public decimal InvestedMoney { get; set; }
         public DateTime LastDay { get; set; }
         public string? CreatorName { get; set; }
+        public List<TierDto>? Tiers { get; set; }
     }
 }

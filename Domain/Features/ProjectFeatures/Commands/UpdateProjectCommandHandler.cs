@@ -1,4 +1,5 @@
-﻿using Core.Dtos;
+﻿using AutoMapper;
+using Core.Dtos;
 using Domain.Abstract;
 using Domain.DomainModels.Enums;
 using MediatR;
@@ -9,30 +10,25 @@ namespace Domain.Features.ProjectFeatures.Commands
     public class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand, Response>
     {
         private readonly IApplicationDbContext _context;
-        public UpdateProjectCommandHandler(IApplicationDbContext context)
+        private readonly IMapper _mapper;
+        public UpdateProjectCommandHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public async Task<Response> Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
         {
             var project = await _context.Projects.FirstOrDefaultAsync(x => x.Id == request.Id);
+
             if (project == null)
             {
                 return new Response { Status = ResponseStatus.NotFound, Message = "Project doesn't exist!" };
             }
-            else
-            {
-                project.Title = request.Title;
-                project.Description = request.Description;
-                project.ImageUrl = request.ImageUrl;
-                project.Status = request.Status;
-                project.StartingDay = request.StartingDay;
-                project.LastDay = request.LastDay;
-                project.RequiredMoney = request.RequiredMoney;
-                project.InvestedMoney = request.InvestedMoney;
-                await _context.SaveChanges();
-                return new Response { Status = ResponseStatus.Success, Message = "Project was updated successfully" };
-            }
+            project = _mapper.Map(request, project);
+
+            await _context.SaveChanges();
+
+            return new Response { Status = ResponseStatus.Success, Message = "Project was updated successfully" };
         }
     }
 }

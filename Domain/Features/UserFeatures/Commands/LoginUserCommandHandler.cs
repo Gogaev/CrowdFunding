@@ -32,8 +32,8 @@ namespace Domain.Features.UserFeatures.Commands
 
                 var authClaims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user.UserName),
                     new Claim("UserId", user.Id),
+                    new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
 
@@ -44,26 +44,28 @@ namespace Domain.Features.UserFeatures.Commands
 
                 var token = GetToken(authClaims);
 
+                var tokenHandler = new JwtSecurityTokenHandler();
+                await _userManager.SetAuthenticationTokenAsync(user, TokenOptions.DefaultProvider, "LoginToken", tokenHandler.WriteToken(token));
+
                 return new Response { 
                     Status = ResponseStatus.Success,
                     Message = new JwtSecurityTokenHandler().WriteToken(token)+","+token.ValidTo
                 };
             }
+
             return new Response { Status = ResponseStatus.Unauthorized, Message = "Name or password is wrong" };
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
-            var authSignedKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
             var token = new JwtSecurityToken(
-                issuer: _configuration["KeyForAdminRegister"],
+                issuer: _configuration["JWT:ValidIssuer"],
                 audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.UtcNow.AddHours(3),
+                expires: DateTime.Now.AddHours(6),
                 claims: authClaims,
-                signingCredentials: new SigningCredentials(authSignedKey, SecurityAlgorithms.HmacSha256)
+                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
-
             return token;
         }
     }
