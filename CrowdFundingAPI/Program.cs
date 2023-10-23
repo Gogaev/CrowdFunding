@@ -79,7 +79,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseMiddleware<ErrorHandler>();
 app.UseAuthentication();
 app.UseAuthorization();
 

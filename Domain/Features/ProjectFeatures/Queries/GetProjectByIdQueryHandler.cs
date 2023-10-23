@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.ProjectFeatures.Queries
 {
-    public class GetProjectByIdQueryHandler : IRequestHandler<GetProjectByIdQuery, ProjectWithTiersDto?>
+    public class GetProjectByIdQueryHandler : IRequestHandler<GetProjectByIdQuery, ProjectWithTiersDto>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -15,7 +15,7 @@ namespace Domain.Features.ProjectFeatures.Queries
             _context = context;
             _mapper = mapper;
         }
-        public async Task<ProjectWithTiersDto?> Handle(GetProjectByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ProjectWithTiersDto> Handle(GetProjectByIdQuery request, CancellationToken cancellationToken)
         {
             var project = await _context.Projects.Include(x => x.Creator).Include(x => x.Tiers).FirstOrDefaultAsync(x => x.Id == request.Id);
 
@@ -23,7 +23,7 @@ namespace Domain.Features.ProjectFeatures.Queries
 
             if (project == null)
             {
-                return null;
+                throw new KeyNotFoundException("Project with such id doesn't exist");
             }
 
             return result;

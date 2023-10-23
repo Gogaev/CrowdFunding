@@ -24,10 +24,6 @@ namespace CrowdFundingAPI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetUsersQuery());
-            if(result is null)
-            {
-                return BadRequest();
-            }
             return Ok(result);
         }
 
@@ -36,10 +32,6 @@ namespace CrowdFundingAPI.Controllers
         public async Task<IActionResult> GetById(string id)
         {
             var result = Ok(await _mediator.Send(new GetUserByIdQuery(id)));
-            if (result is null)
-            {
-                return BadRequest();
-            }
             return Ok(result);
         }
 
@@ -65,14 +57,16 @@ namespace CrowdFundingAPI.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
         {
-            return Ok(await _mediator.Send(command));
+            await _mediator.Send(command);
+            return Ok("User created successfully!");
         }
 
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            return Ok(await _mediator.Send(new DeleteUserCommand(id)));
+            await _mediator.Send(new DeleteUserCommand(id));
+            return Ok("User deleted successfully");
         }
     }
 }

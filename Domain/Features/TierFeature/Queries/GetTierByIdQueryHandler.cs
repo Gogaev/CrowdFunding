@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Dtos.Tier;
 using Domain.Abstract;
+using Domain.DomainModels.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,10 +20,12 @@ namespace Domain.Features.TierFeature.Queries
         public async Task<TierDto?> Handle(GetTierByIdQuary request, CancellationToken cancellationToken)
         {
             var tier = await _context.Tiers.FirstOrDefaultAsync(x => x.Id == request.Id);
-            if (tier == null)
+
+            if (tier is null)
             {
-                return null;
+                throw new KeyNotFoundException("Tier doesn't exists");
             }
+
             return _mapper.Map<TierDto>(tier);
         }
     }

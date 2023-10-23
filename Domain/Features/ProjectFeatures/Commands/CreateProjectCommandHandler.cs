@@ -3,11 +3,12 @@ using Core.Dtos;
 using Domain.Abstract;
 using Domain.DomainModels.Entities;
 using Domain.DomainModels.Enums;
+using Domain.DomainModels.Exceptions;
 using MediatR;
 
 namespace Domain.Features.ProjectFeatures.Commands
 {
-    public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, Response>
+    public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand>
     {
         private readonly IApplicationDbContext _context;
         private readonly IUserService _userService;
@@ -19,7 +20,7 @@ namespace Domain.Features.ProjectFeatures.Commands
             _mapper = mapper;
         }
 
-        public async Task<Response> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
+        public async Task Handle(CreateProjectCommand request, CancellationToken cancellationToken)
         {
             var project = new Project()
             {
@@ -31,10 +32,15 @@ namespace Domain.Features.ProjectFeatures.Commands
 
             project = _mapper.Map(request, project);
             
-            _context.Projects.Add(project);
+            var result = _context.Projects.Add(project);
+
+            if (result is null)
+            {
+                throw new Exception("Can't create project");
+            }
+
             await _context.SaveChanges();
 
-            return new Response { Status = ResponseStatus.Success, Message = "Project was created successfully" };
         }
     }
 }

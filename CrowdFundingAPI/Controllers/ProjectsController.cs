@@ -4,6 +4,7 @@ using Domain.Features.ProjectFeatures.Commands;
 using Domain.Features.ProjectFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,30 +36,32 @@ namespace CrowdFundingAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Create(CreateProjectCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            await _mediator.Send(command);
+            return Ok("Project was created successfully");
         }
 
         [HttpPost("support")]
         [Authorize]
         public async Task<IActionResult> SupportProject(SupportProjectCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            await _mediator.Send(command);
+            return Ok("Project was supported");
         }
 
         [Authorize]
         [HttpPatch("publish")]
-        public async Task PublishProject(PublishProjectCommand command)
+        public async Task<IActionResult> PublishProject(PublishProjectCommand command)
         {
             await _mediator.Send(command);
+            return Ok("Project was published");
         }
 
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<IActionResult> Delete(string id)
         {
-            return Ok(await _mediator.Send(new DeleteProjectCommand(id)));
+            await _mediator.Send(new DeleteProjectCommand(id));
+            return Ok("Project was deleted successfully");
         }
 
         [HttpPut("{id}")]
@@ -69,7 +72,9 @@ namespace CrowdFundingAPI.Controllers
             {
                 return BadRequest();
             }
-            return Ok(await _mediator.Send(command));
+
+            await _mediator.Send(command);
+            return Ok("Project was updated successfully");
         }
     }
 }

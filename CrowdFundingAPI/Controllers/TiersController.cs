@@ -22,14 +22,8 @@ namespace CrowdFundingAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Create(CreateTierCommand command)
         {
-            var result = await _mediator.Send(command);
-
-            if(result.Status == ResponseStatus.InternalServerError)
-            {
-                return BadRequest(result.Message);
-            }
-
-            return Ok(result.Message);
+            await _mediator.Send(command);
+            return Ok("Tier was created successfully");
         }
 
         [HttpGet]
@@ -62,22 +56,9 @@ namespace CrowdFundingAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(string id)
         {
-            var result = await _mediator.Send(new DeleteTierCommand(id));
+            await _mediator.Send(new DeleteTierCommand(id));
 
-            if(result is null)
-            {
-                return BadRequest();
-            }
-
-            switch (result.Status)
-            {
-                case ResponseStatus.Success:
-                    return Ok(result.Message);
-                case ResponseStatus.NotFound:
-                    return NotFound(result.Message);
-            }
-
-            return BadRequest();
+            return Ok("Tier was deleted successfully");
         }
 
         [HttpPut("{id}")]
@@ -88,7 +69,10 @@ namespace CrowdFundingAPI.Controllers
             {
                 return BadRequest();
             }
-            return Ok(await _mediator.Send(command));
+
+            await _mediator.Send(command);
+
+            return Ok("Tier was updated successfully");
         }
     }
 }

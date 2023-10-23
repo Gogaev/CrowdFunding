@@ -4,13 +4,14 @@ using Core.Dtos.User;
 using Domain.DomainModels.Constants;
 using Domain.DomainModels.Entities;
 using Domain.DomainModels.Enums;
+using Domain.DomainModels.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 
 namespace Domain.Features.UserFeatures.Commands
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Response>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand>
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -25,18 +26,18 @@ namespace Domain.Features.UserFeatures.Commands
             _config = config;
         }
 
-        public async Task<Response> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             if(request.UserName == null || request.Password == null)
             {
-                return new Response { Status = ResponseStatus.BadRequest, Message = "Name or password is null" };
+                throw new AppException("Name or password is null");
             }
 
             var userExists = await _userManager.FindByNameAsync(request.UserName);
 
             if (userExists != null)
             {
-                return new Response { Status = ResponseStatus.BadRequest, Message = "User already exists!" };
+                throw new AppException("User already exists!");
             }
 
             var user = new ApplicationUser
@@ -50,7 +51,7 @@ namespace Domain.Features.UserFeatures.Commands
 
             if (!result.Succeeded)
             {
-                return new Response { Status = ResponseStatus.InternalServerError, Message = "User creation failed! Please check user details and try again." };
+                throw new Exception("User creation failed! Please check user details and try again.");
             }
 
             if (!await _roleManager.RoleExistsAsync(UserRoles.User))
@@ -62,7 +63,7 @@ namespace Domain.Features.UserFeatures.Commands
             {
                 if(request.AdminKey is null || request.AdminKey != _config["KeyForAdminRegister"])
                 {
-                    return new Response { Status = ResponseStatus.BadRequest, Message = "Wrong admin key" };
+                    throw new AppException("Wrong admin key");
                 }
 
                 if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
@@ -85,8 +86,6 @@ namespace Domain.Features.UserFeatures.Commands
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
             }
-
-            return new Response { Status = ResponseStatus.Success, Message = "User created successfully!" };
         }
     }
 

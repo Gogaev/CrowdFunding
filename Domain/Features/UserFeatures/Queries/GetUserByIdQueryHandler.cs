@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.UserFeatures.Queries
 {
-    public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDto?>
+    public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDto>
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
@@ -18,13 +18,15 @@ namespace Domain.Features.UserFeatures.Queries
             _userManager = userManager;
         }
 
-        public async Task<UserDto?> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        public async Task<UserDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == request.Id);
-            if (user == null)
+
+            if (user is null)
             {
-                return null;
+                throw new KeyNotFoundException("User with such id doesn't exist");
             }
+
             return _mapper.Map<UserDto>(user);
         }
     }

@@ -3,5 +3,5 @@ using MediatR;
 
 namespace Domain.Features.UserFeatures.Commands
 {
-    public record DeleteUserCommand(string Id) : IRequest<Response>;
+    public record DeleteUserCommand(string Id) : IRequest;
 }

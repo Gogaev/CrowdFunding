@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.ProjectFeatures.Commands
 {
-    public class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand, Response>
+    public class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -16,19 +16,17 @@ namespace Domain.Features.ProjectFeatures.Commands
             _context = context;
             _mapper = mapper;
         }
-        public async Task<Response> Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
         {
             var project = await _context.Projects.FirstOrDefaultAsync(x => x.Id == request.Id);
 
-            if (project == null)
+            if (project is null)
             {
-                return new Response { Status = ResponseStatus.NotFound, Message = "Project doesn't exist!" };
+                throw new KeyNotFoundException("Project doesn't exist!");
             }
             project = _mapper.Map(request, project);
 
             await _context.SaveChanges();
-
-            return new Response { Status = ResponseStatus.Success, Message = "Project was updated successfully" };
         }
     }
 }

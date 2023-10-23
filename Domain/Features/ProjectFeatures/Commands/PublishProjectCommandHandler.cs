@@ -17,10 +17,10 @@ namespace Domain.Features.ProjectFeatures.Commands
         public async Task Handle(PublishProjectCommand request, CancellationToken cancellationToken)
         {
             var project = await _context.Projects.FirstOrDefaultAsync(x => x.Id == request.Id);
-            
-            if (project == null)
+
+            if (project is null)
             {
-                throw new NullReferenceException("Project doesn't exist");
+                throw new KeyNotFoundException("Project doesn't exist!");
             }
 
             project.Status = Status.Published;

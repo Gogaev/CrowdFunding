@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.TierFeature.Commands;
 
-public class UpdateTierCommandHandler : IRequestHandler<UpdateTierCommand, Response>
+public class UpdateTierCommandHandler : IRequestHandler<UpdateTierCommand>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -16,18 +16,19 @@ public class UpdateTierCommandHandler : IRequestHandler<UpdateTierCommand, Respo
         _context = context;
         _mapper = mapper;
     }
-    public async Task<Response> Handle(UpdateTierCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateTierCommand request, CancellationToken cancellationToken)
     {
         var tier = await _context.Tiers.FirstOrDefaultAsync(x => x.Id == request.Id);
-        if (tier == null)
+
+        if (tier is null)
         {
-            return new Response { Status = ResponseStatus.NotFound, Message = "Tier doesn't exist!" };
+            throw new KeyNotFoundException("Tier doesn't exists");
         }
+
         else
         {
             _mapper.Map(request, tier);
             await _context.SaveChanges();
-            return new Response { Status = ResponseStatus.Success, Message = "Tier was updated successfully" };
         }
     }
 }

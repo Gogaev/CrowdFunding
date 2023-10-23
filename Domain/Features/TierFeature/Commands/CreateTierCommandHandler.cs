@@ -3,11 +3,12 @@ using Core.Dtos;
 using Domain.Abstract;
 using Domain.DomainModels.Entities;
 using Domain.DomainModels.Enums;
+using Domain.DomainModels.Exceptions;
 using MediatR;
 
 namespace Domain.Features.TierFeature.Commands
 {
-    public class CreateTierCommandHandler : IRequestHandler<CreateTierCommand, Response>
+    public class CreateTierCommandHandler : IRequestHandler<CreateTierCommand>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -16,20 +17,19 @@ namespace Domain.Features.TierFeature.Commands
             _context = context;
             _mapper = mapper;
         }
-        public async Task<Response> Handle(CreateTierCommand request, CancellationToken cancellationToken)
+        public async Task Handle(CreateTierCommand request, CancellationToken cancellationToken)
         {
             var tier = _mapper.Map<Tier>(request);
             tier.Id = Guid.NewGuid().ToString();
 
             var result = _context.Tiers.Add(tier);
             
-            if(result == null)
+            if(result is null)
             {
-                return new Response { Status = ResponseStatus.InternalServerError, Message = "Can't create tier!" };
+                throw new AppException("Can't create tier");
             }
 
             await _context.SaveChanges();
-            return new Response { Status = ResponseStatus.Success, Message = "Tier was created successfully" };
         }
     }
 }

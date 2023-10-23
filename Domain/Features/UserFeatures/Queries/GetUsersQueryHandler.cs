@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using Core.Dtos.User;
 using Domain.DomainModels.Entities;
+using Domain.DomainModels.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.UserFeatures.Queries
 {
-    public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, IEnumerable<UserDto>?>
+    public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, IEnumerable<UserDto>>
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
@@ -18,15 +19,17 @@ namespace Domain.Features.UserFeatures.Queries
             _userManager = userManager;
         }
 
-        public async Task<IEnumerable<UserDto>?> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<UserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
             var userList = _mapper.Map<List<ApplicationUser>, List<UserDto>>(await _userManager.Users
                 .Include(x => x.CreatedProjects)
                 .ToListAsync());
-            if (userList == null)
+
+            if (userList is null)
             {
-                return null;
+                throw new AppException("No user exists");
             }
+
             return userList.AsReadOnly();
         }
     }

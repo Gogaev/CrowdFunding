@@ -47,13 +47,13 @@ namespace Domain.Features.UserFeatures.Commands
                 var tokenHandler = new JwtSecurityTokenHandler();
                 await _userManager.SetAuthenticationTokenAsync(user, TokenOptions.DefaultProvider, "LoginToken", tokenHandler.WriteToken(token));
 
-                return new Response { 
+                return new Response {
                     Status = ResponseStatus.Success,
                     Message = new JwtSecurityTokenHandler().WriteToken(token)+","+token.ValidTo
                 };
             }
 
-            return new Response { Status = ResponseStatus.Unauthorized, Message = "Name or password is wrong" };
+            throw new UnauthorizedAccessException("Name or password is wrong");
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core.Dtos.User
 {
-    public class RegisterUserCommand : IRequest<Response>
+    public class RegisterUserCommand : IRequest
     {
         public string? UserName { get; set; }
         public string? FullName { get; set; }

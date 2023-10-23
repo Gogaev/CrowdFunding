@@ -6,23 +6,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.TierFeature.Commands
 {
-    public class DeleteTierCommandHandler : IRequestHandler<DeleteTierCommand, Response>
+    public class DeleteTierCommandHandler : IRequestHandler<DeleteTierCommand>
     {
         private readonly IApplicationDbContext _context;
         public DeleteTierCommandHandler(IApplicationDbContext context)
         {
             _context = context;
         }
-        public async Task<Response> Handle(DeleteTierCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteTierCommand request, CancellationToken cancellationToken)
         {
             var tier = await _context.Tiers.FirstOrDefaultAsync(x => x.Id == request.Id);
-            if (tier == null)
+
+            if (tier is null)
             {
-                return new Response { Status = ResponseStatus.NotFound, Message = "Tier doesn't exist!" };
+                throw new KeyNotFoundException("Tier doesn't exists");
             }
+
             _context.Tiers.Remove(tier);
             await _context.SaveChanges();
-            return new Response { Status = ResponseStatus.Success, Message = "Tier was deleted successfully" };
         }
     }
 }

@@ -14,5 +14,5 @@ namespace Domain.Features.ProjectFeatures.Commands
         DateTime LastDay,
         decimal RequiredMoney,
         decimal InvestedMoney
-        ) : IRequest<Response>;
+        ) : IRequest;
 }
