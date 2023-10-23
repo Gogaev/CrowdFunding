@@ -22,40 +22,67 @@ namespace CrowdFundingAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Create(CreateTierCommand command)
         {
-            return Ok(await _mediator.Send(command));
+            var result = await _mediator.Send(command);
+
+            if(result.Status == ResponseStatus.InternalServerError)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return Ok(result.Message);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _mediator.Send(new GetAllTiersQuary()));
+            var result = await _mediator.Send(new GetAllTiersQuary());
+
+            if(result is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(string id)
         {
             var result = await _mediator.Send(new GetTierByIdQuary(id));
-            if(result is not null)
-            {
-                return Ok(result);
-            }
-            if(result is null)
+
+            if (result is null)
             {
                 return NotFound(new Response { Status = ResponseStatus.BadRequest, Message = "Can't find user with this id" });
             }
-            return BadRequest();
+
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
         [Authorize]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
-            return Ok(await _mediator.Send(new DeleteTierCommand(id)));
+            var result = await _mediator.Send(new DeleteTierCommand(id));
+
+            if(result is null)
+            {
+                return BadRequest();
+            }
+
+            switch (result.Status)
+            {
+                case ResponseStatus.Success:
+                    return Ok(result.Message);
+                case ResponseStatus.NotFound:
+                    return NotFound(result.Message);
+            }
+
+            return BadRequest();
         }
 
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<IActionResult> Update(int id, UpdateTierCommand command)
+        public async Task<IActionResult> Update(string id, UpdateTierCommand command)
         {
             if (id != command.Id)
             {

@@ -5,7 +5,7 @@ using MediatR;
 namespace Domain.Features.ProjectFeatures.Commands
 {
     public record UpdateProjectCommand(
-        int Id,
+        string Id,
         string Title,
         string Description,
         string ImageUrl,

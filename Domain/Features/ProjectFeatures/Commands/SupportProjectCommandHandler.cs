@@ -31,6 +31,8 @@ namespace Domain.Features.ProjectFeatures.Commands
                 return new Response { Status = ResponseStatus.NotFound, Message = "Project doesn't exist" };
             }
 
+
+
             var userId = _userService.GetUserId();
 
             if(userId == null)
@@ -46,7 +48,7 @@ namespace Domain.Features.ProjectFeatures.Commands
             }
 
             project.InvestedMoney += request.MoneyAmmount;
-            project.Supporters.Add(user);
+            user.SupportedProjects.Add(project);
             await _context.SaveChanges();
 
             return new Response { Status = ResponseStatus.Success, Message = "Project was supported" };

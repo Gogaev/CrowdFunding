@@ -18,12 +18,7 @@ namespace Domain.Features.TierFeature.Queries
         }
         public async Task<IEnumerable<TierDto>?> Handle(GetAllTiersQuary request, CancellationToken cancellationToken)
         {
-            var tierList = _mapper.Map<List<Tier>, List<TierDto>>(await _context.Tiers.ToListAsync());
-            if (tierList == null)
-            {
-                return null;
-            }
-            return tierList.AsReadOnly();
+            return _mapper.Map<List<Tier>, List<TierDto>>(await _context.Tiers.ToListAsync());
         }
     }
 }

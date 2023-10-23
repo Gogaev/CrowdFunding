@@ -10,6 +10,10 @@ using Domain.Extentions;
 using Domain.Services;
 using Domain.Features.ProjectFeatures.Commands;
 using Domain.DomainModels.Entities;
+using FluentValidation;
+using Domain.Features.TierFeature.Commands;
+using CrowdFundingAPI.Validators.TierValidators;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +30,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddFluentValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateTierValidator>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 

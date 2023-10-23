@@ -3,5 +3,5 @@ using MediatR;
 
 namespace Domain.Features.TierFeature.Commands
 {
-    public record UpdateTierCommand(int Id, string? TierName, decimal RequiredMoney, string Benefit, bool IsReached, int ProjectId) : IRequest<Response>;
+    public record UpdateTierCommand(string Id, string? TierName, decimal RequiredMoney, string Benefit, bool IsReached, string ProjectId) : IRequest<Response>;
 }

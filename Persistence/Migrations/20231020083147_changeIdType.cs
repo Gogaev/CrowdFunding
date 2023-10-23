@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateUser : Migration
+    public partial class changeIdType : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -167,8 +167,7 @@ namespace Persistence.Migrations
                 name: "Projects",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     Title = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     ImageUrl = table.Column<string>(type: "text", nullable: false),
@@ -194,7 +193,7 @@ namespace Persistence.Migrations
                 name: "ApplicationUserProject",
                 columns: table => new
                 {
-                    SupportedProjectsId = table.Column<int>(type: "integer", nullable: false),
+                    SupportedProjectsId = table.Column<string>(type: "text", nullable: false),
                     SupportersId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -205,26 +204,25 @@ namespace Persistence.Migrations
                         column: x => x.SupportersId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ApplicationUserProject_Projects_SupportedProjectsId",
                         column: x => x.SupportedProjectsId,
                         principalTable: "Projects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Tiers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     TierName = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     RequiredMoney = table.Column<decimal>(type: "numeric(15,2)", precision: 15, scale: 2, nullable: false),
                     Benefit = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     IsReached = table.Column<bool>(type: "boolean", nullable: false),
-                    ProjectId = table.Column<int>(type: "integer", nullable: false)
+                    ProjectId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

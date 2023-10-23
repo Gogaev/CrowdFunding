@@ -3,5 +3,5 @@ using MediatR;
 
 namespace Domain.Features.TierFeature.Queries
 {
-    public record GetTierByIdQuary(int Id) : IRequest<TierDto?>;
+    public record GetTierByIdQuary(string Id) : IRequest<TierDto?>;
 }

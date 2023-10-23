@@ -22,11 +22,11 @@ namespace CrowdFundingAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _mediator.Send(new GetAllProjectsQuary()));
+            return Ok(await _mediator.Send(new GetAllProjectsQuery()));
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(string id)
         {
             return Ok(await _mediator.Send(new GetProjectByIdQuery(id)));
         }
@@ -47,16 +47,23 @@ namespace CrowdFundingAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize]
+        [HttpPatch("publish")]
+        public async Task PublishProject(PublishProjectCommand command)
+        {
+            await _mediator.Send(command);
+        }
+
         [HttpDelete("{id}")]
         [Authorize]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             return Ok(await _mediator.Send(new DeleteProjectCommand(id)));
         }
 
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<IActionResult> Update(int id, UpdateProjectCommand command)
+        public async Task<IActionResult> Update(string id, UpdateProjectCommand command)
         {
             if (id != command.Id)
             {

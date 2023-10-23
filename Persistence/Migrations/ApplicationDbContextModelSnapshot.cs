@@ -26,8 +26,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("ApplicationUserProject", b =>
                 {
-                    b.Property<int>("SupportedProjectsId")
-                        .HasColumnType("integer");
+                    b.Property<string>("SupportedProjectsId")
+                        .HasColumnType("text");
 
                     b.Property<string>("SupportersId")
                         .HasColumnType("text");
@@ -39,7 +39,7 @@ namespace Persistence.Migrations
                     b.ToTable("ApplicationUserProject");
                 });
 
-            modelBuilder.Entity("Domain.DomainModels.ApplicationUser", b =>
+            modelBuilder.Entity("Domain.DomainModels.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -109,13 +109,10 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.DomainModels.Project", b =>
+            modelBuilder.Entity("Domain.DomainModels.Entities.Project", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<string>("CreatorId")
                         .HasColumnType("text");
@@ -157,13 +154,10 @@ namespace Persistence.Migrations
                     b.ToTable("Projects", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.DomainModels.Tier", b =>
+            modelBuilder.Entity("Domain.DomainModels.Entities.Tier", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<string>("Benefit")
                         .IsRequired()
@@ -173,8 +167,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("IsReached")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("integer");
+                    b.Property<string>("ProjectId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<decimal>("RequiredMoney")
                         .HasPrecision(15, 2)
@@ -326,22 +321,22 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("ApplicationUserProject", b =>
                 {
-                    b.HasOne("Domain.DomainModels.Project", null)
+                    b.HasOne("Domain.DomainModels.Entities.Project", null)
                         .WithMany()
                         .HasForeignKey("SupportedProjectsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.DomainModels.ApplicationUser", null)
+                    b.HasOne("Domain.DomainModels.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("SupportersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.DomainModels.Project", b =>
+            modelBuilder.Entity("Domain.DomainModels.Entities.Project", b =>
                 {
-                    b.HasOne("Domain.DomainModels.ApplicationUser", "Creator")
+                    b.HasOne("Domain.DomainModels.Entities.ApplicationUser", "Creator")
                         .WithMany("CreatedProjects")
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -349,9 +344,9 @@ namespace Persistence.Migrations
                     b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("Domain.DomainModels.Tier", b =>
+            modelBuilder.Entity("Domain.DomainModels.Entities.Tier", b =>
                 {
-                    b.HasOne("Domain.DomainModels.Project", "Project")
+                    b.HasOne("Domain.DomainModels.Entities.Project", "Project")
                         .WithMany("Tiers")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -371,7 +366,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Domain.DomainModels.ApplicationUser", null)
+                    b.HasOne("Domain.DomainModels.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -380,7 +375,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Domain.DomainModels.ApplicationUser", null)
+                    b.HasOne("Domain.DomainModels.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -395,7 +390,7 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.DomainModels.ApplicationUser", null)
+                    b.HasOne("Domain.DomainModels.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -404,19 +399,19 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Domain.DomainModels.ApplicationUser", null)
+                    b.HasOne("Domain.DomainModels.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.DomainModels.ApplicationUser", b =>
+            modelBuilder.Entity("Domain.DomainModels.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("CreatedProjects");
                 });
 
-            modelBuilder.Entity("Domain.DomainModels.Project", b =>
+            modelBuilder.Entity("Domain.DomainModels.Entities.Project", b =>
                 {
                     b.Navigation("Tiers");
                 });

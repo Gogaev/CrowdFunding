@@ -19,7 +19,15 @@ namespace Domain.Features.TierFeature.Commands
         public async Task<Response> Handle(CreateTierCommand request, CancellationToken cancellationToken)
         {
             var tier = _mapper.Map<Tier>(request);
-            _context.Tiers.Add(tier);
+            tier.Id = Guid.NewGuid().ToString();
+
+            var result = _context.Tiers.Add(tier);
+            
+            if(result == null)
+            {
+                return new Response { Status = ResponseStatus.InternalServerError, Message = "Can't create tier!" };
+            }
+
             await _context.SaveChanges();
             return new Response { Status = ResponseStatus.Success, Message = "Tier was created successfully" };
         }

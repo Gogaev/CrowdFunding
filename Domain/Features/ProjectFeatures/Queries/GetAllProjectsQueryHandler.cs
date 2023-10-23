@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.ProjectFeatures.Queries
 {
-    public class GetAllProjectsQuaryHandler : IRequestHandler<GetAllProjectsQuary, IEnumerable<ProjectDto>>
+    public class GetAllProjectsQuaryHandler : IRequestHandler<GetAllProjectsQuary, IEnumerable<ProjectDto?>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -16,9 +16,9 @@ namespace Domain.Features.ProjectFeatures.Queries
             _context = context;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<ProjectDto>> Handle(GetAllProjectsQuary request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ProjectDto?>> Handle(GetAllProjectsQuary request, CancellationToken cancellationToken)
         {
-            var projectList = _mapper.Map<List<Project>, List<ProjectDto>>(await _context.Projects.Include(x => x.Creator).ToListAsync());
+            var projectList = _mapper.Map<List<Project>, List<ProjectDto>>(await _context.Projects.Include(x => x.Creator).Include(x => x.Supporters).ToListAsync());
 
             if (projectList == null)
             {

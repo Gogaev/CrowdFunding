@@ -30,6 +30,7 @@ namespace CrowdFundingAPI.Controllers
             }
             return Ok(result);
         }
+
         [Authorize(Roles = UserRoles.Admin)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
@@ -66,9 +67,9 @@ namespace CrowdFundingAPI.Controllers
         {
             return Ok(await _mediator.Send(command));
         }
+
         [Authorize]
         [HttpDelete("{id}")]
-       
         public async Task<IActionResult> Delete(string id)
         {
             return Ok(await _mediator.Send(new DeleteUserCommand(id)));

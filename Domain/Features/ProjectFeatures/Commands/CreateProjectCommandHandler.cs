@@ -23,6 +23,7 @@ namespace Domain.Features.ProjectFeatures.Commands
         {
             var project = new Project()
             {
+                Id = Guid.NewGuid().ToString(),
                 Status = Status.Draft,
                 CreatorId = _userService.GetUserId(),
                 InvestedMoney = 0

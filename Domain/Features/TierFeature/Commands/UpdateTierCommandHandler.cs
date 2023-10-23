@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Core.Dtos;
 using Domain.Abstract;
-using Domain.DomainModels;
 using Domain.DomainModels.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

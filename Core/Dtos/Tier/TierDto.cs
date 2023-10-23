@@ -2,7 +2,7 @@
 {
     public class TierDto
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string TierName { get; set; } = "";
         public decimal RequiredMoney { get; set; }
         public bool IsReached { get; set; }

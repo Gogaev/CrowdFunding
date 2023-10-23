@@ -29,7 +29,10 @@ namespace Domain.Mapper.ProjectMapping
                     opt => opt.MapFrom(src => src.InvestedMoney))
                 .ForMember(dest =>
                     dest.CreatorName,
-                    opt => opt.MapFrom(src => src.Creator.FullName));
+                    opt => opt.MapFrom(src => src.Creator.FullName))
+                .ForMember(dest => 
+                    dest.Supporters,
+                    opt => opt.MapFrom(src => src.Supporters.Select(x => x.FullName).ToList()));
         }
     }
 }
