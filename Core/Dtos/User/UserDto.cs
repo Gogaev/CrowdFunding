@@ -1,5 +1,4 @@
-﻿
-namespace Core.Dtos.User
+﻿namespace Core.Dtos.User
 {
     public class UserDto
     {

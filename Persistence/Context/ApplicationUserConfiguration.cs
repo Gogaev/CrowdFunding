@@ -10,13 +10,12 @@ namespace Persistence.Context
         {
             builder.ToTable("AspNetUsers");
 
+            builder.HasKey(x => x.Id);
+
             builder.HasMany(u => u.CreatedProjects)
                 .WithOne(p => p.Creator)
                 .HasForeignKey(p => p.CreatorId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasMany(u => u.SupportedProjects)
-                .WithMany(p => p.Supporters);
         }
     }
 }

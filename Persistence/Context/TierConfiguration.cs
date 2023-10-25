@@ -10,6 +10,8 @@ namespace Persistence.Context
         {
             builder.ToTable("Tiers");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(p => p.TierName)
                 .HasMaxLength(20)
                 .IsRequired();

@@ -36,6 +36,7 @@ namespace Domain.Services
                     case UnauthorizedAccessException e:
                         response.StatusCode = (int)HttpStatusCode.Unauthorized;
                         break;
+                    case NullReferenceException e:
                     default:
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;

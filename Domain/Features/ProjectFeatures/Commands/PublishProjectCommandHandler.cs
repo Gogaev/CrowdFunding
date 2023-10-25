@@ -25,7 +25,10 @@ namespace Domain.Features.ProjectFeatures.Commands
 
             project.Status = Status.Published;
             project.StartingDay = DateTime.UtcNow;
-
+            if(project.LastDay == DateTime.MinValue)
+            {
+                project.LastDay = DateTime.UtcNow.AddMonths(6);
+            }
             await _context.SaveChanges();
         }
     }

@@ -4,6 +4,7 @@ using Domain.Features.UserFeatures.Commands;
 using Domain.Features.UserFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrowdFundingAPI.Controllers
@@ -31,7 +32,7 @@ namespace CrowdFundingAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
-            var result = Ok(await _mediator.Send(new GetUserByIdQuery(id)));
+            var result = await _mediator.Send(new GetUserByIdQuery(id));
             return Ok(result);
         }
 
@@ -39,18 +40,7 @@ namespace CrowdFundingAPI.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
         {
-            var result = (await _mediator.Send(command)).Message?.Split(',');
-            
-            if(result is null)
-            {
-                return BadRequest();
-            }
-
-            return Ok(new
-            {
-                token = result[0],
-                expired = result[1]
-            });
+            return Ok(await _mediator.Send(command));
         }
 
         [HttpPost]

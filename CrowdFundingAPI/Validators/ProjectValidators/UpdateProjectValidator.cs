@@ -10,14 +10,11 @@ namespace CrowdFundingAPI.Validators.ProjectValidators
             RuleFor(x => x.Id)
                 .NotEmpty();
             RuleFor(x => x.Title)
-                .NotEmpty()
-                .Length(0, 20)
-                .WithMessage("Title is required!");
+                .NotEmpty().WithMessage("Title is required!")
+                .Length(0, 50).WithMessage("Title Must be less than 50 simbols");
             RuleFor(x => x.Description)
                 .Length(0, 2000)
                 .WithMessage("Description must be less than 2000 simbols");
-            RuleFor(x => x.StartingDay)
-                .LessThanOrEqualTo(x => x.LastDay).WithMessage("Creation date can't be greater than lat date");
             RuleFor(x => x.LastDay)
                 .NotEmpty();
             RuleFor(x => x.RequiredMoney)

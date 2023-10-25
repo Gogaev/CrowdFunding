@@ -44,11 +44,6 @@ namespace CrowdFundingAPI.Controllers
         {
             var result = await _mediator.Send(new GetTierByIdQuary(id));
 
-            if (result is null)
-            {
-                return NotFound(new Response { Status = ResponseStatus.BadRequest, Message = "Can't find user with this id" });
-            }
-
             return Ok(result);
         }
 

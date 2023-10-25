@@ -1,6 +1,4 @@
-﻿using Core.Dtos;
-using Domain.Abstract;
-using Domain.DomainModels.Enums;
+﻿using Domain.Abstract;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using Core.Dtos;
 using Domain.Abstract;
 using Domain.DomainModels.Entities;
 using Domain.DomainModels.Enums;
-using Domain.DomainModels.Exceptions;
 using MediatR;
 
 namespace Domain.Features.ProjectFeatures.Commands
@@ -24,7 +22,6 @@ namespace Domain.Features.ProjectFeatures.Commands
         {
             var project = new Project()
             {
-                Id = Guid.NewGuid().ToString(),
                 Status = Status.Draft,
                 CreatorId = _userService.GetUserId(),
                 InvestedMoney = 0

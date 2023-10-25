@@ -25,14 +25,17 @@ namespace Domain.Mapper.ProjectMapping
                     dest.LastDay,
                     opt => opt.MapFrom(src => src.LastDay))
                 .ForMember(dest =>
+                    dest.Status,
+                    opt => opt.MapFrom(src => src.Status.ToString()))
+                .ForMember(dest =>
                     dest.InvestedMoney,
                     opt => opt.MapFrom(src => src.InvestedMoney))
                 .ForMember(dest =>
                     dest.CreatorName,
-                    opt => opt.MapFrom(src => src.Creator.FullName))
-                .ForMember(dest => 
+                    opt => opt.MapFrom(src => src.Creator != null ? src.Creator.FullName : null))
+                .ForMember(dest =>
                     dest.Supporters,
-                    opt => opt.MapFrom(src => src.Supporters.Select(x => x.FullName).ToList()));
+                    opt => opt.MapFrom(src => src.Supporters.Select(src => src.User != null ? src.User.FullName : null).ToList()));
         }
     }
 }

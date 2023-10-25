@@ -1,7 +1,5 @@
-﻿using Core.Dtos;
-using Core.Dtos.User;
+﻿using Core.Dtos.User;
 using Domain.DomainModels.Entities;
-using Domain.DomainModels.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +10,7 @@ using System.Text;
 
 namespace Domain.Features.UserFeatures.Commands
 {
-    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, Response>
+    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, LoginDto>
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
@@ -23,10 +21,15 @@ namespace Domain.Features.UserFeatures.Commands
             _configuration = configuration;
         }
 
-        public async Task<Response> Handle(LoginUserCommand request, CancellationToken cancellationToken)
+        public async Task<LoginDto> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
+            if(request.Username is null || request.Password is null)
+            {
+                throw new NullReferenceException("Username or password is null");
+            }
+
             var user = await _userManager.FindByNameAsync(request.Username);
-            if (user != null && await _userManager.CheckPasswordAsync(user, request.Password))
+            if (user != null && user.UserName != null && await _userManager.CheckPasswordAsync(user, request.Password))
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
 
@@ -47,9 +50,10 @@ namespace Domain.Features.UserFeatures.Commands
                 var tokenHandler = new JwtSecurityTokenHandler();
                 await _userManager.SetAuthenticationTokenAsync(user, TokenOptions.DefaultProvider, "LoginToken", tokenHandler.WriteToken(token));
 
-                return new Response {
-                    Status = ResponseStatus.Success,
-                    Message = new JwtSecurityTokenHandler().WriteToken(token)+","+token.ValidTo
+                return new LoginDto
+                {
+                    Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    Expired = token.ValidTo
                 };
             }
 
@@ -58,7 +62,7 @@ namespace Domain.Features.UserFeatures.Commands
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"] ?? ""));
             var token = new JwtSecurityToken(
                 issuer: _configuration["JWT:ValidIssuer"],
                 audience: _configuration["JWT:ValidAudience"],

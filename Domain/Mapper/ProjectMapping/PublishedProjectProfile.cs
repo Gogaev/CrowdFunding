@@ -4,11 +4,11 @@ using Domain.DomainModels.Entities;
 
 namespace Domain.Mapper.ProjectMapping
 {
-    public class GetProjectByIdProfile : Profile
+    public class PublishedProjectProfile : Profile
     {
-        public GetProjectByIdProfile()
+        public PublishedProjectProfile()
         {
-            CreateMap<Project, ProjectWithTiersDto>()
+            CreateMap<Project, PublishedProjectDto>()
                 .ForMember(dest =>
                     dest.Id,
                     opt => opt.MapFrom(src => src.Id))
@@ -31,8 +31,8 @@ namespace Domain.Mapper.ProjectMapping
                     dest.CreatorName,
                     opt => opt.MapFrom(src => src.Creator != null ? src.Creator.FullName : null))
                 .ForMember(dest =>
-                    dest.Tiers,
-                    opt => opt.MapFrom(src => src.Tiers));
+                    dest.Supporters,
+                    opt => opt.MapFrom(src => src.Supporters.Select(src => src.User != null ? src.User.FullName : null).ToList()));
         }
     }
 }

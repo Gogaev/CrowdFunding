@@ -1,8 +1,6 @@
-﻿using Core.Dtos;
-using Core.Dtos.Project;
+﻿using Core.Dtos.Project;
 using Domain.Abstract;
 using Domain.DomainModels.Entities;
-using Domain.DomainModels.Enums;
 using Domain.DomainModels.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -25,7 +23,7 @@ namespace Domain.Features.ProjectFeatures.Commands
 
         public async Task Handle(SupportProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = await _context.Projects.FirstOrDefaultAsync(x => x.Id == request.ProjectId);
+            var project = await _context.Projects.Include(x => x.Tiers).FirstOrDefaultAsync(x => x.Id == request.ProjectId);
 
             if (project is null)
             {
@@ -46,8 +44,30 @@ namespace Domain.Features.ProjectFeatures.Commands
                 throw new KeyNotFoundException("Can't find user with such Id");
             }
 
+            var isUserSupportingProject = _context.ProjectUsers.Any(up => up.UserId == userId && up.ProjectId == project.Id);
+
+            if (!isUserSupportingProject)
+            {
+                var userProject = new ProjectUser
+                {
+                    UserId = userId,
+                    ProjectId = project.Id,
+                };
+
+                
+                _context.ProjectUsers.Add(userProject);
+            }
             project.InvestedMoney += request.MoneyAmmount;
-            user.SupportedProjects.Add(project);
+            var tiersToUpdate = project.Tiers.Where(x => x.RequiredMoney <= project.InvestedMoney);
+
+            if(tiersToUpdate is not null)
+            {
+                foreach( var t in tiersToUpdate)
+                {
+                    t.IsReached = true;
+                }
+                _context.Tiers.UpdateRange(tiersToUpdate.ToList());
+            }
             await _context.SaveChanges();
         }
     }

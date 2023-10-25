@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using Core.Dtos;
 using Domain.Abstract;
 using Domain.DomainModels.Entities;
-using Domain.DomainModels.Enums;
 using Domain.DomainModels.Exceptions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.TierFeature.Commands
 {
@@ -20,14 +19,15 @@ namespace Domain.Features.TierFeature.Commands
         public async Task Handle(CreateTierCommand request, CancellationToken cancellationToken)
         {
             var tier = _mapper.Map<Tier>(request);
-            tier.Id = Guid.NewGuid().ToString();
 
-            var result = _context.Tiers.Add(tier);
-            
-            if(result is null)
+            var project = await _context.Projects.FirstOrDefaultAsync(x => x.Id == request.ProjectId);
+
+            if(project is null)
             {
-                throw new AppException("Can't create tier");
+                throw new KeyNotFoundException("Project with this id doesn't exist");
             }
+
+            project.Tiers.Add(tier);
 
             await _context.SaveChanges();
         }

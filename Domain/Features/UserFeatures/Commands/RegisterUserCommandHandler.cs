@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using Core.Dtos;
 using Core.Dtos.User;
 using Domain.DomainModels.Constants;
 using Domain.DomainModels.Entities;
-using Domain.DomainModels.Enums;
 using Domain.DomainModels.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;

@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using Domain.DomainModels.Entities;
 using Domain.DomainModels.Enums;
 
@@ -25,6 +24,7 @@ namespace Persistence.Context
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
             builder.ApplyConfiguration(new ProjectConfiguration());
             builder.ApplyConfiguration(new TierConfiguration());
+            builder.ApplyConfiguration(new UserProjectConfiguration());
             builder.HasPostgresEnum<Status>();
             base.OnModelCreating(builder);
         }
@@ -36,5 +36,6 @@ namespace Persistence.Context
 
         public DbSet<Project> Projects { get; set; }
         public DbSet<Tier> Tiers { get; set; }
+        public DbSet<ProjectUser> ProjectUsers { get; set; }
     }
 }

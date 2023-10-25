@@ -1,5 +1,4 @@
-﻿using Core.Dtos;
-using MediatR;
+﻿using MediatR;
 
 namespace Domain.Features.ProjectFeatures.Commands
 {
@@ -7,7 +6,6 @@ namespace Domain.Features.ProjectFeatures.Commands
         string Title,
         string Description,
         string ImageUrl,
-        DateTime StartingDay,
         DateTime LastDay,
         decimal RequiredMoney
         ) : IRequest;

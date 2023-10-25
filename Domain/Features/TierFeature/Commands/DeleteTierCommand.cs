@@ -1,5 +1,4 @@
-﻿using Core.Dtos;
-using MediatR;
+﻿using MediatR;
 
 namespace Domain.Features.TierFeature.Commands
 {

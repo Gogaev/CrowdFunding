@@ -1,6 +1,5 @@
-﻿using Core.Dtos;
+﻿using Domain.Abstract;
 using Domain.DomainModels.Entities;
-using Domain.DomainModels.Enums;
 using Domain.DomainModels.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -11,10 +10,12 @@ namespace Domain.Features.UserFeatures.Commands
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IApplicationDbContext _context;
 
-        public DeleteUserCommandHandler(UserManager<ApplicationUser> userManager)
+        public DeleteUserCommandHandler(UserManager<ApplicationUser> userManager, IApplicationDbContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
 
         public async Task Handle(DeleteUserCommand request, CancellationToken cancellationToken)
@@ -26,9 +27,17 @@ namespace Domain.Features.UserFeatures.Commands
                 throw new KeyNotFoundException("User with such id doesn't exist");
             }
 
+            var userProject = await _context.ProjectUsers.FirstOrDefaultAsync(x => x.UserId == request.Id);
+
+            if(userProject is not null)
+            {
+                _context.ProjectUsers.Remove(userProject);
+                await _context.SaveChanges();
+            }
+
             var result = await _userManager.DeleteAsync(user);
 
-            if(!result.Succeeded)
+            if (!result.Succeeded)
             {
                 throw new AppException("Can't delete user");
             }

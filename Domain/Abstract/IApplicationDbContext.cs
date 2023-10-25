@@ -7,6 +7,7 @@ namespace Domain.Abstract
     {
         DbSet<Project> Projects { get; set; }
         DbSet<Tier> Tiers { get; set; }
+        public DbSet<ProjectUser> ProjectUsers { get; set; }
 
         Task<int> SaveChanges();
     }

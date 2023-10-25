@@ -11,7 +11,6 @@ using Domain.Services;
 using Domain.Features.ProjectFeatures.Commands;
 using Domain.DomainModels.Entities;
 using FluentValidation;
-using Domain.Features.TierFeature.Commands;
 using CrowdFundingAPI.Validators.TierValidators;
 using FluentValidation.AspNetCore;
 
@@ -31,7 +30,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IUserService, UserService>();
 
-builder.Services.AddFluentValidation();
+builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateTierValidator>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
@@ -58,7 +57,7 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidAudience = builder.Configuration["JWT:ValidAudience"],
         ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]??""))
     };
 });
 

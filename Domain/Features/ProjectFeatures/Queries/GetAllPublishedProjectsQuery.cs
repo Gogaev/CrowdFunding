@@ -3,5 +3,5 @@ using MediatR;
 
 namespace Domain.Features.ProjectFeatures.Queries
 {
-    public record GetAllProjectsQuery : IRequest<IEnumerable<ProjectDto>>;
+    public record GetAllPublishedProjectsQuery() : IRequest<IEnumerable<PublishedProjectDto>>;
 }

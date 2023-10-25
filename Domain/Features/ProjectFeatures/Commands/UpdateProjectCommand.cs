@@ -1,5 +1,4 @@
-﻿using Core.Dtos;
-using Domain.DomainModels.Enums;
+﻿using Domain.DomainModels.Enums;
 using MediatR;
 
 namespace Domain.Features.ProjectFeatures.Commands
@@ -10,7 +9,6 @@ namespace Domain.Features.ProjectFeatures.Commands
         string Description,
         string ImageUrl,
         Status Status,
-        DateTime StartingDay,
         DateTime LastDay,
         decimal RequiredMoney,
         decimal InvestedMoney

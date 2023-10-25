@@ -10,6 +10,8 @@ namespace Persistence.Context
         {
             builder.ToTable("Projects");
 
+            builder.HasKey(x => x.Id);
+
             builder.HasMany(p => p.Tiers)
                 .WithOne(t => t.Project)
                 .HasForeignKey(fk => fk.ProjectId)

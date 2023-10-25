@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Core.Dtos.Tier;
 using Domain.Abstract;
-using Domain.DomainModels.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
