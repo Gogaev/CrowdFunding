@@ -12,12 +12,12 @@ namespace Domain.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public string? GetUserId()
+        public string GetUserId()
         {
             var result = string.Empty;
             if(_httpContextAccessor.HttpContext is not null)
             {
-                result = _httpContextAccessor.HttpContext.User?.Claims.First(i => i.Type == "UserId").Value;
+                result = _httpContextAccessor.HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
             }
             return result;
         }

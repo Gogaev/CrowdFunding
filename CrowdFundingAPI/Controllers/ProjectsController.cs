@@ -1,11 +1,8 @@
-﻿using Core.Dtos.Project;
-using Domain.DomainModels.Constants;
-using Domain.DomainModels.Entities;
+﻿using Domain.DomainModels.Constants;
 using Domain.Features.ProjectFeatures.Commands;
 using Domain.Features.ProjectFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrowdFundingAPI.Controllers
@@ -15,19 +12,19 @@ namespace CrowdFundingAPI.Controllers
     public class ProjectsController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public ProjectsController(IMediator mediator, UserManager<ApplicationUser> userManager)
+        public ProjectsController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [HttpGet("getpublished")]
+        [HttpGet("get-published")]
         public async Task<IActionResult> GetAllPublished()
         {
             return Ok(await _mediator.Send(new GetAllPublishedProjectsQuery()));
         }
 
         [Authorize(Roles = UserRoles.Admin)]
-        [HttpGet("getall")]
+        [HttpGet("get-all")]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _mediator.Send(new GetAllProjectsQuery()));

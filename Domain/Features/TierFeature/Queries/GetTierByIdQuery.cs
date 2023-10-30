@@ -1,31 +1,25 @@
 ﻿using AutoMapper;
+using Core.Dtos.Tier;
 using Domain.Abstract;
 using Domain.DomainModels.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Domain.Features.TierFeature.Commands
+namespace Domain.Features.TierFeature.Queries
 {
-    public record UpdateTierCommand(
-        string Id,
-        string? TierName,
-        decimal RequiredMoney,
-        string Benefit,
-        bool IsReached,
-        string ProjectId) : IRequest
+    public record GetTierByIdQuery(string Id) : IRequest<TierDto?>
     {
-        public class UpdateTierCommandHandler : IRequestHandler<UpdateTierCommand>
+        public class GetTierByIdQueryHandler : IRequestHandler<GetTierByIdQuery, TierDto?>
         {
             private readonly IApplicationDbContext _context;
             private readonly IMapper _mapper;
 
-            public UpdateTierCommandHandler(IApplicationDbContext context, IMapper mapper)
+            public GetTierByIdQueryHandler(IApplicationDbContext context, IMapper mapper)
             {
                 _context = context;
                 _mapper = mapper;
             }
-
-            public async Task Handle(UpdateTierCommand request, CancellationToken cancellationToken)
+            public async Task<TierDto?> Handle(GetTierByIdQuery request, CancellationToken cancellationToken)
             {
                 var tier = await _context.Tiers
                     .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
@@ -35,9 +29,7 @@ namespace Domain.Features.TierFeature.Commands
                     throw new NotFoundException("Tier doesn't exists");
                 }
 
-                _mapper.Map(request, tier);
-                await _context.SaveChanges();
+                return _mapper.Map<TierDto>(tier);
             }
-        }
-    }
+        }    }
 }

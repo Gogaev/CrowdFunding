@@ -1,10 +1,8 @@
-﻿using Core.Dtos.User;
-using Domain.DomainModels.Constants;
+﻿using Domain.DomainModels.Constants;
 using Domain.Features.UserFeatures.Commands;
 using Domain.Features.UserFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrowdFundingAPI.Controllers
@@ -21,7 +19,7 @@ namespace CrowdFundingAPI.Controllers
         }
 
         [HttpGet]
-        [Route("getUsers")]
+        [Route("get-users")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetUsersQuery());

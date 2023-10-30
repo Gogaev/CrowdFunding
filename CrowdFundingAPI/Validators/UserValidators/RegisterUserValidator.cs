@@ -1,7 +1,7 @@
-﻿using Core.Dtos.User;
+﻿using Domain.Features.UserFeatures.Commands;
 using FluentValidation;
 
-namespace CrowdFundingAPI.Validators.UserValidator
+namespace CrowdFundingAPI.Validators.UserValidators
 {
     public class RegisterUserValidator : AbstractValidator<RegisterUserCommand>
     {
@@ -17,7 +17,7 @@ namespace CrowdFundingAPI.Validators.UserValidator
                 .WithMessage("Name and Surname is Required");
             RuleFor(x => x.Description)
                 .Length(0, 500)
-                .WithMessage("Description should be less than 500 simbols");
+                .WithMessage("Description should be less than 500 symbols");
             RuleFor(x => x.EmailAddress)
                 .NotEmpty()
                 .EmailAddress()

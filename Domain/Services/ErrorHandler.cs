@@ -27,22 +27,21 @@ namespace Domain.Services
 
                 switch (error)
                 {
-                    case AppException e:
+                    case AppException:
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
-                    case KeyNotFoundException e:
+                    case NotFoundException:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
-                    case UnauthorizedAccessException e:
+                    case UnauthorizedAccessException:
                         response.StatusCode = (int)HttpStatusCode.Unauthorized;
                         break;
-                    case NullReferenceException e:
                     default:
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;
                 }
 
-                var result = JsonSerializer.Serialize(new { message = error?.Message });
+                var result = JsonSerializer.Serialize(new { message = error.Message });
                 await response.WriteAsync(result);
             }
         }

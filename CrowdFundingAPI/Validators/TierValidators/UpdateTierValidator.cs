@@ -12,15 +12,15 @@ namespace CrowdFundingAPI.Validators.TierValidators
             RuleFor(x => x.TierName)
                 .NotEmpty()
                 .Length(0, 20)
-                .WithMessage("Tier Name must be bugger than 0 and less then 20 simbols");
+                .WithMessage("Tier Name must be bugger than 0 and less then 20 symbols");
             RuleFor(x => x.RequiredMoney)
                 .NotEmpty()
                 .GreaterThan(0)
-                .WithMessage("Ammount of money must be greater then 0");
+                .WithMessage("Amount of money must be greater then 0");
             RuleFor(x => x.Benefit)
                 .NotEmpty()
                 .Length(0, 100)
-                .WithMessage("Tier Name must be bugger than 0 and less then 100 simbols");
+                .WithMessage("Tier Name must be bugger than 0 and less then 100 symbols");
             RuleFor(x => x.ProjectId)
                 .NotEmpty();
         }

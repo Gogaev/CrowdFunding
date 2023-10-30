@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Core.Dtos.User;
 using Domain.DomainModels.Entities;
+using Domain.Features.UserFeatures.Commands;
 
 namespace Domain.Mapper.UserMapping
 {

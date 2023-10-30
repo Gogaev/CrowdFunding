@@ -32,7 +32,7 @@ namespace Domain.Mapper.ProjectMapping
                     opt => opt.MapFrom(src => src.Creator != null ? src.Creator.FullName : null))
                 .ForMember(dest =>
                     dest.Supporters,
-                    opt => opt.MapFrom(src => src.Supporters.Select(src => src.User != null ? src.User.FullName : null).ToList()));
+                    opt => opt.MapFrom(src => src.Supporters.Select(user => user.User != null ? user.User.FullName : null).ToList()));
         }
     }
 }

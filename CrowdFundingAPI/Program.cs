@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Domain.Extentions;
 using Domain.Services;
-using Domain.Features.ProjectFeatures.Commands;
 using Domain.DomainModels.Entities;
 using FluentValidation;
 using CrowdFundingAPI.Validators.TierValidators;
+using Domain.Extensions;
 using FluentValidation.AspNetCore;
+using static Domain.Features.ProjectFeatures.Commands.UpdateProjectCommand;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +33,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateTierValidator>();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddMediatR(cfg => 
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
@@ -64,8 +65,8 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.ConfigureMapper();
 
-//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<UpdateProjectCommandHandler>());
+builder.Services.AddMediatR(cfg => 
+    cfg.RegisterServicesFromAssemblyContaining<UpdateProjectCommandHandler>());
 builder.Services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
 var app = builder.Build();

@@ -1,5 +1,9 @@
-﻿using Domain.DomainModels.Enums;
+﻿using AutoMapper;
+using Domain.Abstract;
+using Domain.DomainModels.Enums;
+using Domain.DomainModels.Exceptions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.ProjectFeatures.Commands
 {
@@ -11,6 +15,30 @@ namespace Domain.Features.ProjectFeatures.Commands
         Status Status,
         DateTime LastDay,
         decimal RequiredMoney,
-        decimal InvestedMoney
-        ) : IRequest;
+        decimal InvestedMoney) : IRequest
+    {
+        public class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand>
+        {
+            private readonly IApplicationDbContext _context;
+            private readonly IMapper _mapper;
+            public UpdateProjectCommandHandler(IApplicationDbContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+            public async Task Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
+            {
+                var project = await _context.Projects
+                    .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+
+                if (project is null)
+                {
+                    throw new NotFoundException("Project doesn't exist!");
+                }
+
+                _mapper.Map(request, project);
+                await _context.SaveChanges();
+            }
+        }
+    }
 }

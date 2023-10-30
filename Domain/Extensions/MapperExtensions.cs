@@ -4,9 +4,9 @@ using Domain.Mapper.TierMapping;
 using Domain.Mapper.UserMapping;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Domain.Extentions
+namespace Domain.Extensions
 {
-    public static class MapperExtentions
+    public static class MapperExtensions
     {
         public static void ConfigureMapper(this IServiceCollection services)
         {

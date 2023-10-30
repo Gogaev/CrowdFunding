@@ -1,7 +1,7 @@
-﻿using Core.Dtos.User;
+﻿using Domain.Features.UserFeatures.Commands;
 using FluentValidation;
 
-namespace CrowdFundingAPI.Validators.UserValidator
+namespace CrowdFundingAPI.Validators.UserValidators
 {
     public class LoginUserValidator : AbstractValidator<LoginUserCommand>
     {

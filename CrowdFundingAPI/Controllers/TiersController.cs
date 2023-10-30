@@ -1,6 +1,4 @@
-﻿using Core.Dtos;
-using Domain.DomainModels.Enums;
-using Domain.Features.TierFeature.Commands;
+﻿using Domain.Features.TierFeature.Commands;
 using Domain.Features.TierFeature.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +10,7 @@ namespace CrowdFundingAPI.Controllers
     [ApiController]
     public class TiersController : ControllerBase
     {
-        private IMediator _mediator;
+        private readonly IMediator _mediator;
         public TiersController(IMediator mediator)
         {
             _mediator = mediator;
@@ -29,7 +27,7 @@ namespace CrowdFundingAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _mediator.Send(new GetAllTiersQuary());
+            var result = await _mediator.Send(new GetAllTiersQuery());
 
             if(result is null)
             {
@@ -42,9 +40,7 @@ namespace CrowdFundingAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
-            var result = await _mediator.Send(new GetTierByIdQuary(id));
-
-            return Ok(result);
+            return Ok(await _mediator.Send(new GetTierByIdQuery(id)));
         }
 
         [HttpDelete("{id}")]
@@ -66,7 +62,6 @@ namespace CrowdFundingAPI.Controllers
             }
 
             await _mediator.Send(command);
-
             return Ok("Tier was updated successfully");
         }
     }

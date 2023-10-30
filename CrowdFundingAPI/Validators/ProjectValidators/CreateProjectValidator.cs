@@ -9,15 +9,15 @@ namespace CrowdFundingAPI.Validators.ProjectValidators
         {
             RuleFor(x => x.Title)
                 .NotEmpty().WithMessage("Title is required!")
-                .Length(0, 50).WithMessage("Title Must be less than 50 simbols");
+                .Length(0, 50).WithMessage("Title Must be less than 50 symbols");
             RuleFor(x => x.Description)
                 .Length(0, 2000)
-                .WithMessage("Description must be less than 2000 simbols");
+                .WithMessage("Description must be less than 2000 symbols");
             //RuleFor(x => x.LastDay)
             //    .NotEmpty();
             RuleFor(x => x.RequiredMoney)
                 .NotNull()
-                .GreaterThan(0).WithMessage("Required ammount must be greater than 0");
+                .GreaterThan(0).WithMessage("Required amount must be greater than 0");
         }
     }
 }
