@@ -23,7 +23,7 @@ namespace Domain.Extensions
                 mc.AddProfile(new GetProjectByIdProfile());
                 mc.AddProfile(new ProjectProfile());
             });
-            IMapper mapper = mapperConfig.CreateMapper();
+            var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
         }
     }

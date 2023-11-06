@@ -16,7 +16,7 @@ using static Domain.Features.ProjectFeatures.Commands.UpdateProjectCommand;
 
 var builder = WebApplication.CreateBuilder(args);
 
-ConfigurationManager configuration = builder.Configuration;
+var configuration = builder.Configuration;
 
 // Add services to the container.
 
@@ -27,8 +27,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpContextAccessor();
-
-builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateTierValidator>();
@@ -42,6 +40,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder => builder
+        .WithOrigins("http://localhost:4200")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .SetIsOriginAllowed(_ => true)
+        .AllowCredentials());
+});
 
 builder.Services.AddAuthentication(options =>
 {
@@ -79,6 +87,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("CorsPolicy");
 app.UseMiddleware<ErrorHandler>();
 app.UseAuthentication();
 app.UseAuthorization();
