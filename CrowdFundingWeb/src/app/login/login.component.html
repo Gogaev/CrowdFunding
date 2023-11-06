@@ -1,0 +1,28 @@
+<p>login works!</p>
+
+<div class="card-body p-md-5 mx-md-4">
+
+    <div class="text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/1055/1055593.png" style="width: 185px;" alt="logo">
+      <h4 class="mt-1 mb-5 pb-1">We are future of crowd funding</h4>
+    </div>
+
+    <form [formGroup]="form">
+      <p>Please login to your account</p>
+
+      <div class="form-outline mb-4">
+        <input name="username" formControlName="username" class="form-control" placeholder="UserName">
+        <label class="form-label" style="margin-left: 0px;">Username</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 67.2px;"></div><div class="form-notch-trailing"></div></div></div>
+
+      <div class="form-outline mb-4">
+        <input type="password" input name="password" formControlName="password" class="form-control" placeholder="Password">
+        <label class="form-label" style="margin-left: 0px;">Password</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 64px;"></div><div class="form-notch-trailing"></div></div></div>
+
+      <div class="text-center pt-1 mb-5 pb-1">
+        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" (click)="login()">Log
+          in</button>
+      </div>
+    </form>
+  </div>

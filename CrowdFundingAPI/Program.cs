@@ -28,6 +28,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddScoped<IUserService, UserService>();
+
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateTierValidator>();
 
@@ -76,6 +78,7 @@ builder.Services.ConfigureMapper();
 builder.Services.AddMediatR(cfg => 
     cfg.RegisterServicesFromAssemblyContaining<UpdateProjectCommandHandler>());
 builder.Services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 
 var app = builder.Build();
 

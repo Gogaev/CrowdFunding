@@ -18,6 +18,7 @@ namespace CrowdFundingAPI.Controllers
         }
 
         [HttpGet("get-published")]
+        [Authorize]
         public async Task<IActionResult> GetAllPublished()
         {
             return Ok(await _mediator.Send(new GetAllPublishedProjectsQuery()));

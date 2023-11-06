@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../_services/account.service';
+import { Router } from '@angular/router';
+import { TokenStorageService } from '../_services/_tokenServices/token-storage.service';
 
 @Component({
   selector: 'app-nav',
@@ -8,24 +10,26 @@ import { AccountService } from '../_services/account.service';
 })
 export class NavComponent implements OnInit {
   model: any = {}
-  loggedIn = false;
+  loggedIn = false
   
-  constructor(private accountService: AccountService){}
+  constructor(public accountService: AccountService, private router: Router,){}
   
   ngOnInit(): void {
   }
+  
 
-  login(){
-    this.accountService.login(this.model).subscribe({
-      next: response => {
-        console.log(response);
-        this.loggedIn = true;
-      },
-      error: error => console.log(error)
-    });
-  }
+  // login(){
+  //   this.accountService.login(this.model).subscribe({
+  //     next: response => {
+  //       console.log(response);
+  //       this.loggedIn = true;
+  //     },
+  //     error: error => console.log(error)
+  //   });
+  // }
 
   logout(){
-    this.loggedIn = false;
+    this.accountService.logout();
+    this.router.navigateByUrl('/');
   }
 }

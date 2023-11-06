@@ -1,12 +1,10 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using Core.Dtos.User;
+using Domain.Abstract;
 using Domain.DomainModels.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Domain.Features.UserFeatures.Commands
 {
@@ -15,12 +13,12 @@ namespace Domain.Features.UserFeatures.Commands
         public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, LoginDto>
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IConfiguration _configuration;
+        private readonly IJwtTokenService _jwtTokenService;
 
-        public LoginUserCommandHandler(UserManager<ApplicationUser> userManager, IConfiguration configuration)
+        public LoginUserCommandHandler(UserManager<ApplicationUser> userManager, IJwtTokenService jwtTokenService)
         {
             _userManager = userManager;
-            _configuration = configuration;
+            _jwtTokenService = jwtTokenService;
         }
 
         public async Task<LoginDto> Handle(LoginUserCommand request, CancellationToken cancellationToken)
@@ -47,7 +45,7 @@ namespace Domain.Features.UserFeatures.Commands
 
             authClaims.AddRange(userRoles.Select(userRole => new Claim(ClaimTypes.Role, userRole)));
 
-            var token = GetToken(authClaims);
+            var token = _jwtTokenService.GetToken(authClaims);
 
             var tokenHandler = new JwtSecurityTokenHandler();
             await _userManager.SetAuthenticationTokenAsync(user, TokenOptions.DefaultProvider, "LoginToken", tokenHandler.WriteToken(token));
@@ -58,19 +56,6 @@ namespace Domain.Features.UserFeatures.Commands
                 Expired = token.ValidTo
             };
 
-        }
-
-        private JwtSecurityToken GetToken(List<Claim> authClaims)
-        {
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"] ?? ""));
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:ValidIssuer"],
-                audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddHours(6),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                );
-            return token;
         }
     }
     }

@@ -45,8 +45,7 @@ namespace CrowdFundingAPI.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
         {
-            await _mediator.Send(command);
-            return Ok("User created successfully!");
+            return Ok(await _mediator.Send(command));
         }
 
         [Authorize]
