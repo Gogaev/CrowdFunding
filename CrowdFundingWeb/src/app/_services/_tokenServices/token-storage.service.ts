@@ -10,7 +10,7 @@ export class TokenStorageService {
   }
 
   setToken(token: string): void {
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', token.toString());
   }
 
   removeToken(): void {

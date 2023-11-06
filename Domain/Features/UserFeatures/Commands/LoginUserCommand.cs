@@ -52,8 +52,7 @@ namespace Domain.Features.UserFeatures.Commands
 
             return new LoginDto
             {
-                Token = new JwtSecurityTokenHandler().WriteToken(token),
-                Expired = token.ValidTo
+                Token = new JwtSecurityTokenHandler().WriteToken(token)
             };
 
         }

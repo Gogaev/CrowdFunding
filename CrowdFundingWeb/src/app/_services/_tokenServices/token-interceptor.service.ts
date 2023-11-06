@@ -16,9 +16,11 @@ export class TokenInterceptorService implements HttpInterceptor {
     const token = this.tokenStorageService.getToken();
     console.log(this.tokenStorageService.getToken());
     if (token) {
+      let tokenWithoutQuotes = token.trim().slice(1, -1)
+      console.log(tokenWithoutQuotes);
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${tokenWithoutQuotes}`,
         },
       });
     }
