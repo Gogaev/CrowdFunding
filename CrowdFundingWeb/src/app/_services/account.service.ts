@@ -20,7 +20,8 @@ export class AccountService {
       map((response: User) => {
         const user = response;
         if(user){
-          this.tokenStorageService.setToken(JSON.stringify(user.token));
+          this.tokenStorageService.setToken(user.token);
+          console.log("Token " + user.token);
           this.currentUserSource.next(user);
         }
       })
@@ -36,7 +37,8 @@ export class AccountService {
     return this.http.post<User>(this.baseUrl + 'user/register', {username, fullName, description, emailAddress, password, adminKey, role}).pipe(
       map(user => {
         if(user){
-          this.tokenStorageService.setToken(JSON.stringify(user.token));
+          this.tokenStorageService.setToken(user.token);
+          console.log("Token " + user.token);
           this.currentUserSource.next(user);
         }
       })

@@ -13,14 +13,11 @@ export class TokenInterceptorService implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = this.tokenStorageService.getToken();
-    console.log(this.tokenStorageService.getToken());
+    const token = this.tokenStorageService.getToken()?.toString();
     if (token) {
-      let tokenWithoutQuotes = token.trim().slice(1, -1)
-      console.log(tokenWithoutQuotes);
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${tokenWithoutQuotes}`,
+          Authorization: `Bearer ${token}`,
         },
       });
     }

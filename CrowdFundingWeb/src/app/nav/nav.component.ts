@@ -12,22 +12,11 @@ export class NavComponent implements OnInit {
   model: any = {}
   loggedIn = false
   
-  constructor(public accountService: AccountService, private router: Router,){}
+  constructor(public accountService: AccountService, private router: Router, public tokenStorageService: TokenStorageService){}
   
   ngOnInit(): void {
   }
   
-
-  // login(){
-  //   this.accountService.login(this.model).subscribe({
-  //     next: response => {
-  //       console.log(response);
-  //       this.loggedIn = true;
-  //     },
-  //     error: error => console.log(error)
-  //   });
-  // }
-
   logout(){
     this.accountService.logout();
     this.router.navigateByUrl('/');

@@ -30,6 +30,13 @@ namespace CrowdFundingAPI.Controllers
         {
             return Ok(await _mediator.Send(new GetAllProjectsQuery()));
         }
+        
+        [Authorize]
+        [HttpGet("get-all-created")]
+        public async Task<IActionResult> GetAllByUser()
+        {
+            return Ok(await _mediator.Send(new GetAllProjectsQuery()));
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
