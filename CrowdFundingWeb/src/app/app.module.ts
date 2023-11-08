@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { TokenInterceptorService } from './_services/_tokenServices/token-interceptor.service';
 import { AuthInterceptorService } from './_services/_tokenServices/auth-interceptor.service';
+import { CreatedProjectsComponent } from './_projects/created-projects/created-projects.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { AuthInterceptorService } from './_services/_tokenServices/auth-intercep
     NavComponent,
     LoginComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    CreatedProjectsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import { AuthInterceptorService } from './_services/_tokenServices/auth-intercep
     BrowserAnimationsModule,
     FormsModule,
     BsDropdownModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {

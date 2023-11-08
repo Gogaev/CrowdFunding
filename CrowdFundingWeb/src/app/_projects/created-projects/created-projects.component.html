@@ -1,10 +1,9 @@
-<p>A list of all published projects</p>
+<p>A list of projects created by current user</p>
 <ul>
     <li *ngFor="let project of projects">
         {{project.id}} - {{project.title}}
         <p>{{project.description}}</p>
         <p>Зібрано - {{project.investedMoney}}</p>
-        <p>Автор - {{project.creatorName}}</p>
         <hr>
     </li>
 </ul>

@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { User } from '../_models/user';
 import { BehaviorSubject, map } from 'rxjs';
 import { TokenStorageService } from './_tokenServices/token-storage.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl = 'http://localhost:5185/api/';
+  baseUrl = environment.projectsEndpointUrl;
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
 
@@ -24,7 +25,7 @@ export class AccountService {
           console.log("Token " + user.token);
           this.currentUserSource.next(user);
         }
-      })
+      },)
     ); 
   }
 

@@ -18,7 +18,6 @@ namespace CrowdFundingAPI.Controllers
         }
 
         [HttpGet("get-published")]
-        [Authorize]
         public async Task<IActionResult> GetAllPublished()
         {
             return Ok(await _mediator.Send(new GetAllPublishedProjectsQuery()));
@@ -32,10 +31,10 @@ namespace CrowdFundingAPI.Controllers
         }
         
         [Authorize]
-        [HttpGet("get-all-created")]
+        [HttpGet("get-created")]
         public async Task<IActionResult> GetAllByUser()
         {
-            return Ok(await _mediator.Send(new GetAllProjectsQuery()));
+            return Ok(await _mediator.Send(new GetAllCreatedProjects()));
         }
 
         [HttpGet("{id}")]

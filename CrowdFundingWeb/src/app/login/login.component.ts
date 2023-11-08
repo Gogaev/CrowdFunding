@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from '../_services/account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent {
 
     constructor(private fb:FormBuilder, 
                  private authService: AccountService, 
-                 private router: Router) {
+                 private router: Router,
+                 private toastr: ToastrService) {
 
         this.form = this.fb.group({
           username: ['',Validators.required],
@@ -29,10 +31,11 @@ export class LoginComponent {
             this.authService.login(val.username, val.password)
                 .subscribe(
                     () => {
-                        console.log("User is logged in");
+                        this.toastr.success("You are logged in now")
                         this.router.navigateByUrl('/');
                     }
                 );
+
         }
     }
 }
