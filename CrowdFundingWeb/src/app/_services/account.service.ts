@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl = environment.projectsEndpointUrl;
+  baseUrl = environment.usersEndpointUrl;
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
 
@@ -17,7 +17,7 @@ export class AccountService {
 
   login(username:string, password:string){
     // return this.http.post<User>(this.baseUrl + 'user/login', {username, password}); 
-    return this.http.post<User>(this.baseUrl + 'user/login', {username, password}).pipe(
+    return this.http.post<User>(this.baseUrl + 'login', {username, password}).pipe(
       map((response: User) => {
         const user = response;
         if(user){
