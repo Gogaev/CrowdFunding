@@ -6,6 +6,9 @@ namespace Domain.DomainModels.Entities
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Title { get; set; } = "Draft project";
+        //public string Subject { get; set;}
+        //public string ShortDescription { get; set;}
+        //public string[] Images { get; set;}
         public string Description { get; set; } = "Draft Description";
         public string ImageUrl { get; set; } = "";
         public Status Status { get; set; }

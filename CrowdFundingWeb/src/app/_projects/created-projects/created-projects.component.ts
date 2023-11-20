@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { ProjectsApiService } from 'src/app/Scripts/CrowdFundingAPI/Controllers/ProjectsController';
 
 @Component({
   selector: 'app-created-projects',
@@ -11,10 +10,10 @@ export class CreatedProjectsComponent implements OnInit {
   title = 'CrowdFundingWeb';
   projects: any;
   
-  constructor(private http: HttpClient){}
+  constructor(private projectService: ProjectsApiService){}
   
   ngOnInit(): void {
-    this.http.get(environment.projectsEndpointUrl + 'get-created').subscribe({
+    this.projectService.getAllByUser().subscribe({
       next: response => this.projects = response,
       error: error => console.log(error),
       complete: () => console.log('Request has completed') 

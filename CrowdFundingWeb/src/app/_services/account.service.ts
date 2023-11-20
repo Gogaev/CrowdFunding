@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl = environment.usersEndpointUrl;
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
 
@@ -17,7 +16,7 @@ export class AccountService {
 
   login(username:string, password:string){
     // return this.http.post<User>(this.baseUrl + 'user/login', {username, password}); 
-    return this.http.post<User>(this.baseUrl + 'login', {username, password}).pipe(
+    return this.http.post<User>(environment.baseUrl + 'login', {username, password}).pipe(
       map((response: User) => {
         const user = response;
         if(user){
@@ -35,7 +34,7 @@ export class AccountService {
   }
 
   register(username:string, fullName:string, description:string, emailAddress:string, password:string, adminKey:string,  role:string){
-    return this.http.post<User>(this.baseUrl + 'user/register', {username, fullName, description, emailAddress, password, adminKey, role}).pipe(
+    return this.http.post<User>(environment.baseUrl + 'register', {username, fullName, description, emailAddress, password, adminKey, role}).pipe(
       map(user => {
         if(user){
           this.tokenStorageService.setToken(user.token);

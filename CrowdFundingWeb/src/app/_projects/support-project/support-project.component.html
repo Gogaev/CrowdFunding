@@ -1,0 +1,54 @@
+<p class="text-center">support-project works!</p>
+<h1 class="text-center">Долучайтеся до підтримки проекту "{{project.title}}"!</h1>
+<h3 class="text-center">Зібрано - {{project.investedMoney}}</h3>
+<div class="progress my-5">
+    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [ngStyle]="{ 'width': project.investedMoney / project.requiredMoney * 100 + '%' }" aria-valuenow=project.investedMoney aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
+<app-timer [targetDate]=project.lastDay ></app-timer>
+
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm border-primary">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">Донат <i class="bi bi-cash"></i></h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">{{project.requiredMoney * 0.01}}</h1>
+          <p>Почніть з невеличкого вкладу</p>
+          <button type="button" class="w-100 btn btn-lg btn-outline-success" (click)="support(project.requiredMoney * 0.01)">Підтримати</button>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm border-primary">
+        <div class="card-header py-3 text-bg-primary    ">
+          <h4 class="my-0 fw-normal">Донат <i class="bi bi-cash-coin"></i></h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">{{project.requiredMoney * 0.03}}</h1>
+          <p>Дякуємо за допомогу</p>
+          <button type="button" class="w-100 btn btn-lg btn-success" (click)="support( project.requiredMoney * 0.03)">Підтримати</button>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm border-primary">
+        <div class="card-header py-3 text-bg-primary border-primary">
+          <h4 class="my-0 fw-normal">Донат <i class="bi bi-cash-stack"></i></h4>
+        </div>
+        <div class="card-body bg-secondary">
+          <h1 class="card-title pricing-card-title">{{project.requiredMoney * 0.05}}</h1>
+          <p>Ваша допомого безцінна</p>
+          <button type="button" class="w-100 btn btn-lg btn-success" (click)="support( project.requiredMoney * 0.05)">Підтримати</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2 class="text-center">Або оберіть суму донату самостійно</h2>
+  <form [formGroup]="form">
+    <input class="form-control form-control-lg" formControlName="moneyAmount" type="text" placeholder="Введіть суму" id="inputLarge">
+    <div class="mt-4 pt-2">
+      <button class="btn btn-success btn-lg" type="submit" value="Submit" (click)="supportForm()">Підтвердити</button>
+  </div>
+  </form>>

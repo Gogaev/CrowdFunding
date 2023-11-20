@@ -1,4 +1,5 @@
-﻿namespace Core.Dtos.Tier
+﻿
+namespace Core.Dtos.Tier
 {
     public class TierDto
     {

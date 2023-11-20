@@ -1,4 +1,6 @@
-﻿namespace Core.Dtos.Project
+﻿
+
+namespace Core.Dtos.Project
 {
     public class PublishedProjectDto
     {
@@ -7,6 +9,8 @@
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
         public decimal InvestedMoney { get; set; }
+        public decimal RequiredMoney { get; set; }
+        public string Status { get; set; }
         public DateTime LastDay { get; set; }
         public string? CreatorName { get; set; }
         public List<string>? Supporters { get; set; }

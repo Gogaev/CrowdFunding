@@ -14,6 +14,9 @@ import { TokenInterceptorService } from './_services/_tokenServices/token-interc
 import { AuthInterceptorService } from './_services/_tokenServices/auth-interceptor.service';
 import { CreatedProjectsComponent } from './_projects/created-projects/created-projects.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ProjectDetailsComponent } from './_projects/project-details/project-details.component';
+import { SupportProjectComponent } from './_projects/support-project/support-project.component';
+import { TimerComponent } from './timer/timer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     HomeComponent,
     RegisterComponent,
-    CreatedProjectsComponent
+    CreatedProjectsComponent,
+    ProjectDetailsComponent,
+    SupportProjectComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,

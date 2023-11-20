@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { TokenStorageService } from '../_services/_tokenServices/token-storage.service';
+import { Router } from '@angular/router';
+import { ProjectsApiService } from '../Scripts/CrowdFundingAPI/Controllers/ProjectsController';
+import { IPublishedProjectDto } from '../Scripts/Core/Dtos/Project/IPublishedProjectDto';
 
 @Component({
   selector: 'app-home',
@@ -9,15 +11,25 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
   title = 'CrowdFundingWeb';
-  projects: any;
+  projects: IPublishedProjectDto[] = [];
   
-  constructor(private http: HttpClient){}
+  constructor(private projectService: ProjectsApiService,
+     public tokenStorageService: TokenStorageService,
+      private router: Router){}
   
   ngOnInit(): void {
-    this.http.get(environment.projectsEndpointUrl + 'get-published').subscribe({
-      next: response => this.projects = response,
+    this.projectService.getAllPublished().subscribe({
+      next: response => this.projects = Object.values(response),
       error: error => console.log(error),
       complete: () => console.log('Request has completed') 
-    });
+    }
+    );
+  }
+  goToProjectDetails(id: string) {
+    this.router.navigate(['/project-details', id]);
+  }
+
+  goToProjectSupport(id: string) {
+    this.router.navigate(['/project-support', id]);
   }
 }

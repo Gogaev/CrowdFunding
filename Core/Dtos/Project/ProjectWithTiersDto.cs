@@ -9,6 +9,7 @@ namespace Core.Dtos.Project
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
         public decimal InvestedMoney { get; set; }
+        public decimal RequiredMoney { get; set; }
         public DateTime LastDay { get; set; }
         public string? CreatorName { get; set; }
         public List<TierDto>? Tiers { get; set; }

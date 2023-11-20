@@ -1,5 +1,6 @@
 ﻿using Domain.Abstract;
 using Domain.DomainModels.Entities;
+using Domain.DomainModels.Enums;
 using Domain.DomainModels.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -76,6 +77,11 @@ namespace Domain.Features.ProjectFeatures.Commands
                     }
 
                     _context.Tiers.UpdateRange(tiersToUpdate.ToList());
+                }
+
+                if (project.InvestedMoney >= project.RequiredMoney)
+                {
+                    project.Status = Status.Finished;
                 }
 
                 await _context.SaveChanges();

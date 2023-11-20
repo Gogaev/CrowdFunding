@@ -7,41 +7,38 @@
             <div class="card-body p-4 p-md-5">
               <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
               <form [formGroup]="form">
-  
                 <div class="row">
                   <div class="col-md-6 mb-4">
-  
                     <div class="form-outline">
                       <input type="text" formControlName="username" class="form-control form-control-lg" />
                       <label class="form-label">User Name</label>
                     </div>
-  
                   </div>
                   <div class="col-md-6 mb-4">
-  
                     <div class="form-outline">
                       <input type="text" formControlName="fullName" class="form-control form-control-lg" />
                       <label class="form-label">Full Name</label>
                     </div>
-  
                   </div>
                 </div>
-  
                 <div class="row">
                   <div class="d-flex align-items-center">
-  
                     <div class="form-outline datepicker w-100">
                       <input type="text" formControlName="description" class="form-control form-control-lg" />
                       <label class="form-label">Description</label>
                     </div>
-                    
-  
                   </div>
-                  <div class="col-md-6 mb-4">
+                  <div class="d-flex align-items-center">
+                    <div class="form-outline datepicker w-100">
+                      <input type="email" formControlName="emailAddress" class="form-control form-control-lg" />
+                      <label class="form-label">Email</label>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-6 mb-4">
   
-                    <!-- <h6 class="mb-2 pb-1">Gender: </h6> -->
+                    <h6 class="mb-2 pb-1">Gender: </h6>
   
-                    <!-- <div class="form-check form-check-inline">
+                    <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
                         value="option1" checked />
                       <label class="form-check-label" for="femaleGender">Female</label>
@@ -57,17 +54,17 @@
                       <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
                         value="option3" />
                       <label class="form-check-label" for="otherGender">Other</label>
-                    </div> -->
+                    </div>
   
-                  </div>
+                  </div> -->
                 </div>
   
                 <div class="row">
                   <div class="col-md-6 mb-4 pb-2">
   
                     <div class="form-outline">
-                      <input type="email" formControlName="emailAddress" class="form-control form-control-lg" />
-                      <label class="form-label">Email</label>
+                      <input type="password" formControlName="password" class="form-control form-control-lg" />
+                      <label class="form-label">Password</label>
                     </div>
   
                   </div>
@@ -75,7 +72,7 @@
   
                     <div class="form-outline">
                       <input type="password" formControlName="password" class="form-control form-control-lg" />
-                      <label class="form-label">Password</label>
+                      <label class="form-label">Confirm password</label>
                     </div>
   
                   </div>
@@ -88,9 +85,7 @@
                       <option value="1" disabled>Choose option</option>
                       <option value="2">User</option>
                       <option value="3">Admin</option>
-                    </select>
-                    <label class="form-label select-label">Choose option</label>
-  
+                    </select>  
                   </div>
                 </div>
   

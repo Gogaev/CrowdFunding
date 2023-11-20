@@ -28,6 +28,12 @@ namespace Domain.Mapper.ProjectMapping
                     dest.InvestedMoney,
                     opt => opt.MapFrom(src => src.InvestedMoney))
                 .ForMember(dest =>
+                        dest.RequiredMoney,
+                    opt => opt.MapFrom(src => src.RequiredMoney))
+                .ForMember(dest =>
+                        dest.Status,
+                    opt => opt.MapFrom(src => src.Status.ToString()))
+                .ForMember(dest =>
                     dest.CreatorName,
                     opt => opt.MapFrom(src => src.Creator != null ? src.Creator.FullName : null))
                 .ForMember(dest =>

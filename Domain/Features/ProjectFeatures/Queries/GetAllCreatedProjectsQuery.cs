@@ -7,22 +7,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Features.ProjectFeatures.Queries;
 
-public record GetAllCreatedProjects : IRequest<IEnumerable<ProjectDto>>
+public record GetAllCreatedProjectsQuery : IRequest<IEnumerable<ProjectDto>>
 {
-    public class GetAllCreatedProjectsHandler : IRequestHandler<GetAllCreatedProjects, IEnumerable<ProjectDto>>
+    public class GetAllCreatedProjectsQueryHandler : IRequestHandler<GetAllCreatedProjectsQuery, IEnumerable<ProjectDto>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public GetAllCreatedProjectsHandler(IApplicationDbContext context, IMapper mapper, IUserService userService)
+        public GetAllCreatedProjectsQueryHandler(IApplicationDbContext context, IMapper mapper, IUserService userService)
         {
             _context = context;
             _mapper = mapper;
             _userService = userService;
         }
         
-        public async Task<IEnumerable<ProjectDto>> Handle(GetAllCreatedProjects request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ProjectDto>> Handle(GetAllCreatedProjectsQuery request, CancellationToken cancellationToken)
         {
             var currentUserId = _userService.GetUserId();
             var projectList = await _context.Projects
