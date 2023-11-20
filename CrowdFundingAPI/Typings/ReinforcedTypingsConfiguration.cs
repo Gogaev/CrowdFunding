@@ -1,6 +1,9 @@
 ﻿using Core.Dtos.Project;
 using Core.Dtos.Tier;
+using Core.Dtos.User;
 using Domain.Features.ProjectFeatures.Commands;
+using Domain.Features.TierFeature.Commands;
+using Domain.Features.UserFeatures.Commands;
 using Microsoft.AspNetCore.Mvc;
 using Reinforced.Typings.Ast.TypeNames;
 using Reinforced.Typings.Fluent;
@@ -18,11 +21,19 @@ public static class ReinforcedTypingsConfiguration
                     typeof(ProjectWithTiersDto), 
                     typeof(PublishedProjectDto),
                     typeof(TierDto),
+                    typeof(LoginDto),
+                    typeof(UserDto),
                     typeof(CreateProjectCommand),
                     typeof(UpdateProjectCommand),
                     typeof(DeleteProjectCommand),
                     typeof(PublishProjectCommand),
                     typeof(SupportProjectCommand),
+                    typeof(CreateTierCommand),
+                    typeof(DeleteTierCommand),
+                    typeof(UpdateTierCommand),
+                    typeof(DeleteUserCommand),
+                    typeof(LoginUserCommand),
+                    typeof(RegisterUserCommand)
                 },
                 conf => conf.WithPublicProperties()
             );

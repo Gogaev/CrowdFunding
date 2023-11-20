@@ -1,13 +1,16 @@
-﻿using Domain.Features.TierFeature.Commands;
+﻿using CrowdFundingAPI.Typings;
+using Domain.Features.TierFeature.Commands;
 using Domain.Features.TierFeature.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Reinforced.Typings.Attributes;
 
 namespace CrowdFundingAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Tiers")]
     [ApiController]
+    [TsClass(CodeGeneratorType = typeof(AngularControllerGenerator))]
     public class TiersController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -18,6 +21,7 @@ namespace CrowdFundingAPI.Controllers
 
         [HttpPost]
         [Authorize]
+        [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
         public async Task<IActionResult> Create(CreateTierCommand command)
         {
             await _mediator.Send(command);
@@ -25,6 +29,7 @@ namespace CrowdFundingAPI.Controllers
         }
 
         [HttpGet]
+        [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllTiersQuery());
@@ -38,6 +43,7 @@ namespace CrowdFundingAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
         public async Task<IActionResult> GetById(string id)
         {
             return Ok(await _mediator.Send(new GetTierByIdQuery(id)));
@@ -45,6 +51,7 @@ namespace CrowdFundingAPI.Controllers
 
         [HttpDelete("{id}")]
         [Authorize]
+        [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
         public async Task<IActionResult> Delete(string id)
         {
             await _mediator.Send(new DeleteTierCommand(id));
@@ -54,6 +61,7 @@ namespace CrowdFundingAPI.Controllers
 
         [HttpPut("{id}")]
         [Authorize]
+        [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
         public async Task<IActionResult> Update(string id, UpdateTierCommand command)
         {
             if (id != command.Id)
