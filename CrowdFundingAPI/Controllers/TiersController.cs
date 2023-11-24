@@ -3,11 +3,13 @@ using Domain.Features.TierFeature.Commands;
 using Domain.Features.TierFeature.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Reinforced.Typings.Attributes;
 
 namespace CrowdFundingAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/Tiers")]
     [ApiController]
     [TsClass(CodeGeneratorType = typeof(AngularControllerGenerator))]

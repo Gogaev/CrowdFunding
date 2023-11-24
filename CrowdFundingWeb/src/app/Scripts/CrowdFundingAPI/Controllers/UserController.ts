@@ -2,6 +2,7 @@
 //     Changes to this file may cause incorrect behavior and will be lost if
 //     the code is regenerated.
 
+import { ILoginDto } from '../../Core/Dtos/User/ILoginDto';
 import { ILoginUserCommand } from '../../Domain/Features/UserFeatures/Commands/ILoginUserCommand';
 import { IRegisterUserCommand } from '../../Domain/Features/UserFeatures/Commands/IRegisterUserCommand';
 
@@ -26,14 +27,14 @@ import { Observable } from 'rxjs';
 			headers: { accept: 'application/json' }};
 		return this.http.request<any>('GET',`${environment.baseUrl}/api/User/${id}`, options)
 	}
-	login(command: ILoginUserCommand) : Observable<void>
+	login(command: ILoginUserCommand) : Observable<ILoginDto>
 	{
 		const options = {
 			body: command,
 			headers: { accept: 'application/json' }};
 		return this.http.request<any>('POST',`${environment.baseUrl}/api/User/login`, options)
 	}
-	register(command: IRegisterUserCommand) : Observable<void>
+	register(command: IRegisterUserCommand) : Observable<ILoginDto>
 	{
 		const options = {
 			body: command,

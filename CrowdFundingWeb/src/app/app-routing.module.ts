@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { CreatedProjectsComponent } from './_projects/created-projects/created-projects.component';
 import { ProjectDetailsComponent } from './_projects/project-details/project-details.component';
 import { SupportProjectComponent } from './_projects/support-project/support-project.component';
+import { CreateProjectComponent } from './_projects/create-project/create-project.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'my-projects', component: CreatedProjectsComponent},
   {path: 'project-details/:id', component: ProjectDetailsComponent},
   {path: 'project-support/:id', component: SupportProjectComponent},
+  {path: 'create-project', component: CreateProjectComponent},
   {path: '**', component: HomeComponent},
 ];
 

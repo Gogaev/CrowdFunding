@@ -25,7 +25,7 @@ namespace Domain.Features.ProjectFeatures.Queries
                     .Include(x => x.Creator)
                     .Include(x => x.Supporters)
                     .ThenInclude(x => x.User)
-                    .Where(x => x.Status != Status.Draft)
+                    .Where(x => x.Status != Status.Draft && x.Status != Status.Expired)
                     .ToListAsync(cancellationToken: cancellationToken);
 
                 return _mapper.Map<List<Project>, List<PublishedProjectDto>>(projectList);

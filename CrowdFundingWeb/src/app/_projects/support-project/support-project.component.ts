@@ -13,6 +13,8 @@ import { ISupportProjectCommand } from 'src/app/Scripts/Domain/Features/ProjectF
 })
 export class SupportProjectComponent {
   projectId: string = '';
+  
+  date: Date = new Date(2034, 7, 19, 20, 30)
   supportCommand: ISupportProjectCommand = {
      projectId: this.projectId,
      moneyAmount: 0,
@@ -26,6 +28,7 @@ export class SupportProjectComponent {
     requiredMoney: 0,
     investedMoney: 0,
     lastDay: new Date(),
+    status: '',
     tiers: []
   };
   form:FormGroup;

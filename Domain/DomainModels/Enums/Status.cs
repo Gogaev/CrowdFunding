@@ -5,6 +5,7 @@
         Draft,
         Published,
         Finished,
-        Expired
+        Expired,
+        All
     }
 }

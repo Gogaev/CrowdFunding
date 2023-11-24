@@ -15,12 +15,12 @@ namespace Persistence.Context
             builder.HasOne(up => up.User)
             .WithMany(u => u.SupportedProjects)
             .HasForeignKey(up => up.UserId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(up => up.Project)
             .WithMany(p => p.Supporters)
             .HasForeignKey(up => up.ProjectId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

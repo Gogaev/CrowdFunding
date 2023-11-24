@@ -15,7 +15,7 @@ namespace Persistence.Context
             builder.HasMany(u => u.CreatedProjects)
                 .WithOne(p => p.Creator)
                 .HasForeignKey(p => p.CreatorId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

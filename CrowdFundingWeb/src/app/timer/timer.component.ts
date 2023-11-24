@@ -6,6 +6,7 @@ import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular
   styleUrls: ['./timer.component.css']
 })
 export class TimerComponent implements AfterViewInit {
+  @Input() outerDate: Date = new Date;
   date: any;
   now: any;
   @Input() targetDate: any = new Date();
@@ -38,6 +39,7 @@ export class TimerComponent implements AfterViewInit {
   seconds!: ElementRef;
 
   ngAfterViewInit() {
+    console.log(this.outerDate + '- Date');
     setInterval(() => {
       this.tickTock();
       this.difference = this.targetTime - this.now;

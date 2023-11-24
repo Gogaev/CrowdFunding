@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { AccountService } from '../_services/account.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserApiService } from '../Scripts/CrowdFundingAPI/Controllers/UserController';
+import { IRegisterUserCommand } from '../Scripts/Domain/Features/UserFeatures/Commands/IRegisterUserCommand';
+import { TokenStorageService } from '../_services/_tokenServices/token-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -10,8 +12,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent{
   form:FormGroup;
+  commandRegister: IRegisterUserCommand = {
+    userName: '',
+    adminKey: '',
+    description: '',
+    emailAddress: '',
+    fullName: '',
+    password: '',
+    role: ''
+  }
 
-  constructor(private fb:FormBuilder, private accountService: AccountService, private router: Router){
+  constructor(private fb:FormBuilder, private userService: UserApiService ,private tokenStorageService: TokenStorageService, private router: Router){
     this.form = this.fb.group({
       username: ['',Validators.required],
       fullName: ['',Validators.required],
@@ -28,9 +39,17 @@ export class RegisterComponent{
   register(){ 
     const val = this.form.value;
     if (val.username && val.password) {
-      this.accountService.register(val.username, val.fullName, val.description, val.emailAddress, val.password, val.adminKey, val.role)
+      this.commandRegister.description = val.description;
+      this.commandRegister.userName = val.username;
+      this.commandRegister.fullName = val.fullName;
+      this.commandRegister.emailAddress = val.emailAddress;
+      this.commandRegister.password = val.password;
+      this.commandRegister.description = val.description;
+      this.commandRegister.description = val.description;
+      this.userService.register(this.commandRegister)
           .subscribe(
-              () => {
+              (result) => {
+                  this.tokenStorageService.setToken(result.token);
                   console.log("User is registered in");
                   this.router.navigateByUrl('/');
               }

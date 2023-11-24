@@ -10,8 +10,10 @@ using Domain.Services;
 using Domain.DomainModels.Entities;
 using FluentValidation;
 using CrowdFundingAPI.Validators.TierValidators;
+using Domain;
 using Domain.Extensions;
 using FluentValidation.AspNetCore;
+using Quartz;
 using static Domain.Features.ProjectFeatures.Commands.UpdateProjectCommand;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,6 +54,22 @@ builder.Services.AddCors(options =>
         .SetIsOriginAllowed(_ => true)
         .AllowCredentials());
 });
+
+builder.Services.AddQuartz(options =>
+{
+    options.UseMicrosoftDependencyInjectionJobFactory();
+    var jobKey = JobKey.Create(nameof(ProjectStatusBackgroundJob));
+    options
+        .AddJob<ProjectStatusBackgroundJob>(jobKey)
+        .AddTrigger(trigger =>
+            trigger
+                .ForJob(jobKey)
+                .WithSimpleSchedule(schedule =>
+                    schedule.WithIntervalInSeconds(30)
+                        .RepeatForever()));
+});
+
+builder.Services.AddQuartzHostedService();
 
 builder.Services.AddAuthentication(options =>
 {

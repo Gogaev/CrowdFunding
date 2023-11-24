@@ -30,11 +30,18 @@ import { Observable } from 'rxjs';
 			headers: { accept: 'application/json' }};
 		return this.http.request<any>('GET',`${environment.baseUrl}/api/Projects/get-all`, options)
 	}
-	getAllByUser() : Observable<IProjectDto[]>
+	getAllByUser(status: number) : Observable<IProjectWithTiersDto[]>
+	{
+		const options = {
+			params: { status: encodeURIComponent(status) },
+			headers: { accept: 'application/json' }};
+		return this.http.request<any>('GET',`${environment.baseUrl}/api/Projects/get-created/${status}`, options)
+	}
+	getFiltered() : Observable<IProjectWithTiersDto[]>
 	{
 		const options = {
 			headers: { accept: 'application/json' }};
-		return this.http.request<any>('GET',`${environment.baseUrl}/api/Projects/get-created`, options)
+		return this.http.request<any>('GET',`${environment.baseUrl}/api/Projects/get-filtered`, options)
 	}
 	getById(id: string) : Observable<IProjectWithTiersDto>
 	{

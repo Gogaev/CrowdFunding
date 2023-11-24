@@ -8,6 +8,7 @@ namespace Core.Dtos.Project
         public string? Title { get; set; }
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
+        public string Status { get; set; }
         public decimal InvestedMoney { get; set; }
         public decimal RequiredMoney { get; set; }
         public DateTime LastDay { get; set; }

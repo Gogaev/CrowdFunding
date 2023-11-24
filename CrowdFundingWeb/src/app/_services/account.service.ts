@@ -15,14 +15,13 @@ export class AccountService {
   constructor(private http: HttpClient, private tokenStorageService: TokenStorageService) { }
 
   login(username:string, password:string){
-    // return this.http.post<User>(this.baseUrl + 'user/login', {username, password}); 
     return this.http.post<User>(environment.baseUrl + 'login', {username, password}).pipe(
       map((response: User) => {
         const user = response;
         if(user){
           this.tokenStorageService.setToken(user.token);
           console.log("Token " + user.token);
-          this.currentUserSource.next(user);
+          //this.currentUserSource.next(user);
         }
       },)
     ); 
@@ -30,7 +29,7 @@ export class AccountService {
 
   logout(){
     this.tokenStorageService.removeToken();
-    this.currentUserSource.next(null);
+    //this.currentUserSource.next(null);
   }
 
   register(username:string, fullName:string, description:string, emailAddress:string, password:string, adminKey:string,  role:string){
@@ -39,7 +38,7 @@ export class AccountService {
         if(user){
           this.tokenStorageService.setToken(user.token);
           console.log("Token " + user.token);
-          this.currentUserSource.next(user);
+          //this.currentUserSource.next(user);
         }
       })
     )

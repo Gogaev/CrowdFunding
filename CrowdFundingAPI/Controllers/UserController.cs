@@ -1,14 +1,17 @@
-﻿using CrowdFundingAPI.Typings;
+﻿using Core.Dtos.User;
+using CrowdFundingAPI.Typings;
 using Domain.DomainModels.Constants;
 using Domain.Features.UserFeatures.Commands;
 using Domain.Features.UserFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Reinforced.Typings.Attributes;
 
 namespace CrowdFundingAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/User")]
     [ApiController]
     [TsClass(CodeGeneratorType = typeof(AngularControllerGenerator))]
@@ -40,14 +43,14 @@ namespace CrowdFundingAPI.Controllers
 
         [HttpPost ("login")]
         [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
-        public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
+        public async Task<ActionResult<LoginDto>> Login([FromBody] LoginUserCommand command)
         {
             return Ok(await _mediator.Send(command));
         }
 
         [HttpPost("register")]
         [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
-        public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
+        public async Task<ActionResult<LoginDto>> Register([FromBody] RegisterUserCommand command)
         {
             return Ok(await _mediator.Send(command));
         }

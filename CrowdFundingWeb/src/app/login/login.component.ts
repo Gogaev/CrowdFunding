@@ -40,7 +40,8 @@ export class LoginComponent {
           this.loginCommand.password = val.password;
             this.userService.login(this.loginCommand)
                 .subscribe(
-                    () => {
+                    (result) => {
+                      this.tokenStorageService.setToken(result.token)
                         this.toastr.success("You are logged in now")
                         this.router.navigateByUrl('/');
                     }

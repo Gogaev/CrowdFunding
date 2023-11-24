@@ -1,15 +1,18 @@
 ﻿using Core.Dtos.Project;
 using CrowdFundingAPI.Typings;
 using Domain.DomainModels.Constants;
+using Domain.DomainModels.Enums;
 using Domain.Features.ProjectFeatures.Commands;
 using Domain.Features.ProjectFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Reinforced.Typings.Attributes;
 
 namespace CrowdFundingAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/Projects")]
     [ApiController]
     [TsClass(CodeGeneratorType = typeof(AngularControllerGenerator))]
@@ -37,13 +40,22 @@ namespace CrowdFundingAPI.Controllers
         }
         
         [Authorize]
-        [HttpGet("get-created")]
+        [HttpGet("get-created/{status}")]
         [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
-        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetAllByUser()
+        public async Task<ActionResult<IEnumerable<ProjectWithTiersDto>>> GetAllByUser(Status status)
         {
-            return Ok(await _mediator.Send(new GetAllCreatedProjectsQuery()));
+            Console.WriteLine(status);
+            return Ok(await _mediator.Send(new GetAllCreatedProjectsQuery(status)));
         }
 
+        [Authorize]
+        [HttpGet("get-filtered")]
+        [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
+        public async Task<ActionResult<IEnumerable<ProjectWithTiersDto>>> GetFiltered()
+        {
+            throw new Exception();
+        }
+        
         [HttpGet("{id}")]
         [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
         public async Task<ActionResult<ProjectWithTiersDto>> GetById(string id)

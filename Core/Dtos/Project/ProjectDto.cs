@@ -1,6 +1,4 @@
-﻿
-
-namespace Core.Dtos.Project
+﻿namespace Core.Dtos.Project
 {
     public class ProjectDto
     {

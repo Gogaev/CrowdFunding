@@ -19,6 +19,7 @@ export class ProjectDetailsComponent {
     lastDay: new Date,
     requiredMoney: 0,
     title: '',
+    status:'',
     tiers: []
   };
 

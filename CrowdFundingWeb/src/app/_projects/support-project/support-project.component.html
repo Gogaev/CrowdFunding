@@ -5,8 +5,8 @@
     <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [ngStyle]="{ 'width': project.investedMoney / project.requiredMoney * 100 + '%' }" aria-valuenow=project.investedMoney aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 
-<app-timer [targetDate]=project.lastDay ></app-timer>
-
+<app-timer [outerDate]="project.lastDay" ></app-timer>
+<p>{{project.lastDay}}</p>
 <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     <div class="col">
       <div class="card mb-4 rounded-3 shadow-sm border-primary">

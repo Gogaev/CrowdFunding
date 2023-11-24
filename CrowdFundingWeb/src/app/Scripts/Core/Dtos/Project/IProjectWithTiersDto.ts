@@ -10,6 +10,7 @@ export interface IProjectWithTiersDto
 	title: string;
 	description: string;
 	imageUrl: string;
+	status: string;
 	investedMoney: number;
 	requiredMoney: number;
 	lastDay: Date;

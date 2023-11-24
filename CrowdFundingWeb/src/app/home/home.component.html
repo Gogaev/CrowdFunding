@@ -1,8 +1,8 @@
 <h1 class="text-center mb-5">A list of all published projects</h1>
-<div class="container">
+<div class="grid-container">
     <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let project of projects">
-          <div class="card mb-4 bg-primary">
+          <div class="card mb-4 bg-primary grid-item">
             <img class="card-img-top" [src]="project.imageUrl" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{ project.title }}</h5>

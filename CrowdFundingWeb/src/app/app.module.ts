@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProjectDetailsComponent } from './_projects/project-details/project-details.component';
 import { SupportProjectComponent } from './_projects/support-project/support-project.component';
 import { TimerComponent } from './timer/timer.component';
+import { CreateProjectComponent } from './_projects/create-project/create-project.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { TimerComponent } from './timer/timer.component';
     CreatedProjectsComponent,
     ProjectDetailsComponent,
     SupportProjectComponent,
-    TimerComponent
+    TimerComponent,
+    CreateProjectComponent
   ],
   imports: [
     BrowserModule,

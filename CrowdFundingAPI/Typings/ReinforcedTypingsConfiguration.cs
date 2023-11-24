@@ -2,6 +2,7 @@
 using Core.Dtos.Tier;
 using Core.Dtos.User;
 using Domain.Features.ProjectFeatures.Commands;
+using Domain.Features.ProjectFeatures.Queries;
 using Domain.Features.TierFeature.Commands;
 using Domain.Features.UserFeatures.Commands;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,8 @@ public static class ReinforcedTypingsConfiguration
                     typeof(UpdateTierCommand),
                     typeof(DeleteUserCommand),
                     typeof(LoginUserCommand),
-                    typeof(RegisterUserCommand)
+                    typeof(RegisterUserCommand),
+                    typeof(GetAllCreatedProjectsQuery)
                 },
                 conf => conf.WithPublicProperties()
             );
