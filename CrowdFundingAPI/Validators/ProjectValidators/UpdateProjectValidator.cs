@@ -20,9 +20,8 @@ namespace CrowdFundingAPI.Validators.ProjectValidators
             RuleFor(x => x.RequiredMoney)
                 .NotNull()
                 .GreaterThan(0).WithMessage("Required amount must be greater than 0");
-            RuleFor(x => x.InvestedMoney)
-               .NotNull()
-               .GreaterThan(0).WithMessage("Invested amount must be greater than 0");
+            RuleFor(x => x.ImageUrl)
+               .NotNull();
         }
     }
 }

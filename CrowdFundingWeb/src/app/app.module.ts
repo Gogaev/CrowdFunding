@@ -18,6 +18,15 @@ import { ProjectDetailsComponent } from './_projects/project-details/project-det
 import { SupportProjectComponent } from './_projects/support-project/support-project.component';
 import { TimerComponent } from './timer/timer.component';
 import { CreateProjectComponent } from './_projects/create-project/create-project.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
+import { EditProjectComponent } from './_projects/edit-project/edit-project.component';
+import { DatePipe } from '@angular/common';
+import { ErrorInterceptor } from './_services/_exceptionServices/error.interceptor';
+import { NotFoundComponent } from './_errors/not-found/not-found.component';
+import { ServerErrorComponent } from './_errors/server-error/server-error.component';
+import { StoreModule } from '@ngrx/store';
+import { SupportedProjectsComponent } from './_projects/supported-projects/supported-projects.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +39,11 @@ import { CreateProjectComponent } from './_projects/create-project/create-projec
     ProjectDetailsComponent,
     SupportProjectComponent,
     TimerComponent,
-    CreateProjectComponent
+    CreateProjectComponent,
+    EditProjectComponent,
+    NotFoundComponent,
+    ServerErrorComponent,
+    SupportedProjectsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,12 +53,21 @@ import { CreateProjectComponent } from './_projects/create-project/create-projec
     FormsModule,
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
-    ToastrModule.forRoot()
+    MatStepperModule,
+    MatIconModule,
+    ToastrModule.forRoot(),
+    StoreModule.forRoot({}, {})
   ],
   providers: [
+    DatePipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
     {

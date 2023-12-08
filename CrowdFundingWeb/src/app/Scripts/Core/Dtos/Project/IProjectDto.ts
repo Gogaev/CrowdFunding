@@ -7,7 +7,7 @@ export interface IProjectDto
 	id: string;
 	title: string;
 	description: string;
-	imageUrl: string;
+	titleImage: string;
 	investedMoney: number;
 	requiredMoney: number;
 	status: string;

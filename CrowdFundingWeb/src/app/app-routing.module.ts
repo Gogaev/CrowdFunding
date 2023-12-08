@@ -7,6 +7,10 @@ import { CreatedProjectsComponent } from './_projects/created-projects/created-p
 import { ProjectDetailsComponent } from './_projects/project-details/project-details.component';
 import { SupportProjectComponent } from './_projects/support-project/support-project.component';
 import { CreateProjectComponent } from './_projects/create-project/create-project.component';
+import { EditProjectComponent } from './_projects/edit-project/edit-project.component';
+import { NotFoundComponent } from './_errors/not-found/not-found.component';
+import { ServerErrorComponent } from './_errors/server-error/server-error.component';
+import { SupportedProjectsComponent } from './_projects/supported-projects/supported-projects.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -16,7 +20,11 @@ const routes: Routes = [
   {path: 'project-details/:id', component: ProjectDetailsComponent},
   {path: 'project-support/:id', component: SupportProjectComponent},
   {path: 'create-project', component: CreateProjectComponent},
-  {path: '**', component: HomeComponent},
+  {path: 'edit-project/:id', component: EditProjectComponent},
+  {path: 'not-found', component: NotFoundComponent},
+  {path: 'server-error', component: ServerErrorComponent},
+  {path: 'supported', component: SupportedProjectsComponent},
+  {path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({

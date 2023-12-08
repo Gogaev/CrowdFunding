@@ -32,9 +32,12 @@ public record GetAllCreatedProjectsQuery(Status status) : IRequest<IEnumerable<P
                     .Where(x => x.Status == request.status);
             }
             var currentUserId = _userService.GetUserId();
-            query = query.Where(x => x.CreatorId == currentUserId);
+            query = query
+                .Where(x => x.CreatorId == currentUserId)
+                .Where(x => !x.IsDeleted);
             var projectList = await query
                 .OrderBy(x => x.Status == Status.Expired)
+                .Include(x => x.Tiers.Where(x => !x.isDeleted))
                 .ToListAsync(cancellationToken: cancellationToken);
             return _mapper.Map<List<Project>, List<ProjectWithTiersDto>>(projectList);
         }

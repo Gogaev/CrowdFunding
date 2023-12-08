@@ -44,7 +44,6 @@ namespace CrowdFundingAPI.Controllers
         [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
         public async Task<ActionResult<IEnumerable<ProjectWithTiersDto>>> GetAllByUser(Status status)
         {
-            Console.WriteLine(status);
             return Ok(await _mediator.Send(new GetAllCreatedProjectsQuery(status)));
         }
 
@@ -61,6 +60,14 @@ namespace CrowdFundingAPI.Controllers
         public async Task<ActionResult<ProjectWithTiersDto>> GetById(string id)
         {
             return Ok(await _mediator.Send(new GetProjectByIdQuery(id)));
+        }
+
+        [HttpGet("supported")]
+        [Authorize]
+        [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
+        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetSupported()
+        {
+            return Ok(await _mediator.Send(new GetAllSupportedProjectQuery()));
         }
 
         [HttpPost]
@@ -95,20 +102,24 @@ namespace CrowdFundingAPI.Controllers
         [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
         public async Task<IActionResult> Delete(string id)
         {
-            await _mediator.Send(new DeleteProjectCommand(id));
+            await _mediator.Send(new SoftDeleteProjectCommand(id));
             return Ok("Project was deleted successfully");
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("soft-delete/{id}")]
         [Authorize]
         [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
-        public async Task<IActionResult> Update(string id, UpdateProjectCommand command)
+        public async Task<IActionResult> SoftDelete(string id)
         {
-            if (id != command.Id)
-            {
-                return BadRequest();
-            }
+            await _mediator.Send(new SoftDeleteProjectCommand(id));
+            return Ok("Project was deleted successfully");
+        }
 
+        [HttpPut]
+        [Authorize]
+        [TsFunction(CodeGeneratorType = typeof(AngularActionCallGenerator))]
+        public async Task<IActionResult> Update(UpdateProjectCommand command)
+        {
             await _mediator.Send(command);
             return Ok("Project was updated successfully");
         }

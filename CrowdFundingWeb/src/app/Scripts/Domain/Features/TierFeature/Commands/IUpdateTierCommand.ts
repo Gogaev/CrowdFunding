@@ -5,9 +5,6 @@
 export interface IUpdateTierCommand
 {
 	id: string;
-	tierName: string;
 	requiredMoney: number;
 	benefit: string;
-	isReached: boolean;
-	projectId: string;
 }

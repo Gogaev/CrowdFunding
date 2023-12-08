@@ -24,7 +24,8 @@ namespace Domain.Features.TierFeature.Commands
                     throw new NotFoundException("Tier doesn't exists");
                 }
 
-                _context.Tiers.Remove(tier);
+                tier.isDeleted = true;
+                
                 await _context.SaveChanges();
             }
         }

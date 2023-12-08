@@ -19,8 +19,8 @@ namespace Domain.Mapper.ProjectMapping
                     dest.Description,
                     opt => opt.MapFrom(src => src.Description))
                 .ForMember(dest =>
-                    dest.ImageUrl,
-                    opt => opt.MapFrom(src => src.ImageUrl))
+                    dest.TitleImage,
+                    opt => opt.MapFrom(src => src.TitleImage))
                 .ForMember(dest =>
                     dest.LastDay,
                     opt => opt.MapFrom(src => src.LastDay))

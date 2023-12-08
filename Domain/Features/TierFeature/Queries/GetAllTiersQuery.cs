@@ -21,7 +21,9 @@ namespace Domain.Features.TierFeature.Queries
             public async Task<IEnumerable<TierDto>?> Handle(GetAllTiersQuery request, CancellationToken cancellationToken)
             {
                 return _mapper.Map<List<Tier>, List<TierDto>>(
-                    await _context.Tiers.ToListAsync(cancellationToken: cancellationToken)
+                    await _context.Tiers
+                        .Where(x => !x.isDeleted)
+                        .ToListAsync(cancellationToken: cancellationToken)
                 );
             }
         }

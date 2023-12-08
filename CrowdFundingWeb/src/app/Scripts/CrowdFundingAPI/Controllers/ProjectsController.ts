@@ -50,6 +50,12 @@ import { Observable } from 'rxjs';
 			headers: { accept: 'application/json' }};
 		return this.http.request<any>('GET',`${environment.baseUrl}/api/Projects/${id}`, options)
 	}
+	getSupported() : Observable<IProjectDto[]>
+	{
+		const options = {
+			headers: { accept: 'application/json' }};
+		return this.http.request<any>('GET',`${environment.baseUrl}/api/Projects/supported`, options)
+	}
 	create(command: ICreateProjectCommand) : Observable<void>
 	{
 		const options = {
@@ -78,11 +84,18 @@ import { Observable } from 'rxjs';
 			headers: { accept: 'application/json' }};
 		return this.http.request<any>('DELETE',`${environment.baseUrl}/api/Projects/${id}`, options)
 	}
-	update(id: string) : Observable<void>
+	softDelete(id: string) : Observable<void>
 	{
 		const options = {
 			body: null,
 			headers: { accept: 'application/json' }};
-		return this.http.request<any>('PUT',`${environment.baseUrl}/api/Projects/${id}`, options)
+		return this.http.request<any>('PUT',`${environment.baseUrl}/api/Projects/soft-delete/${id}`, options)
+	}
+	update(command: IUpdateProjectCommand) : Observable<void>
+	{
+		const options = {
+			body: command,
+			headers: { accept: 'application/json' }};
+		return this.http.request<any>('PUT',`${environment.baseUrl}/api/Projects/`, options)
 	}
 }

@@ -1,0 +1,40 @@
+<p>edit-project works!</p>
+
+
+<form [formGroup]="form">
+    <div class="row my-3">
+        <div class="d-flex align-items-center">
+          <div class="form-outline datepicker w-100">
+            <input type="text" formControlName="title" class="form-control form-control-lg" />
+            <label class="form-label">Назва проекту</label>
+          </div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-sm-12 col-xl-3">
+            <img [src]="imageURL" class="rounded-top-3" width="305px" height="300px">
+            <input type="file" class="rounded-bottom-3 form-control" (change)="handleFileInput($event)">
+        </div>
+        <div class="col-sm-12 col-xl-4">
+            <div class="row">
+                <div class="form-outline datepicker w-100">
+                    <input type="date" formControlName="lastDay" class="form-control form-control-lg" />
+                    <label class="form-label">Кінцевий термін</label>
+                  </div>
+                  <div class="form-outline datepicker w-100">
+                    <input type="number" formControlName="requiredMoney" class="form-control form-control-lg" />
+                    <label class="form-label">Необхідна сума</label>
+                  </div>
+                  <div class="mt-4 pt-2 text-center">
+                    <button class="btn btn-success btn-lg" type="submit" value="Submit" (click)="updateeProject()">Зберегти зміни</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-5 d-flex">
+            <div class="form-outline datepicker w-100">
+              <textarea class="form-control" formControlName="description" rows="12"></textarea>
+              <label class="form-label">Опишіть свій проект</label>
+            </div>
+          </div>
+      </div>
+</form>

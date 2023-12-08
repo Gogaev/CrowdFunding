@@ -1,6 +1,4 @@
 <p class="text-center text-bg">A list of projects created by current user</p>
-
-
 <div class="row">
   <div class="col-md-1">
       <div class="form-check">
@@ -49,26 +47,88 @@
       <div class="row">
         <div class="col-6">
           <button class="btn text-primary-emphasis" (click)="toggleCollapse(i)">
-            <i class="bi" [ngClass]="{ 'bi-caret-up-square-fill': isOpened[i], 'bi-caret-down-square-fill': !isOpened[i] }"></i>
-             {{proj.title}}
+            <h2>
+              <i class="bi" [ngClass]="{ 'bi-caret-up-square-fill': isOpened[i], 'bi-caret-down-square-fill': !isOpened[i] }"></i>
+              {{proj.title}}
+            </h2>
           </button>
         </div>
         <div class="col-6 text-end">
           <a (click)="goToProjectDetails(proj.id)" class="btn btn-info mx-2">Деталі</a>
+          <a *ngIf="proj.status === 'Draft'" (click)="goToEditProject(proj.id)" class="btn btn-warning align-right mx-1"><i class="bi bi-pencil-square"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8 px-4">
+          <h5>
+            {{proj.description}}  
+          </h5>
+        </div>
+        <div class="col text-end">
           <a *ngIf="proj.status === 'Draft'" (click)="publishItem(proj.id)" class="btn btn-primary align-right mx-1">Опублікувати</a>
-          <a *ngIf="proj.status === 'Draft'" (click)="deleteProject(proj.id)" class="btn btn-warning align-right mx-1"><i class="bi bi-pencil-square"></i></a>
-          <a *ngIf="proj.investedMoney === 0" (click)="deleteProject(proj.id)" class="btn btn-danger align-right mx-1"><i class="bi bi-trash3"></i></a>
+          <a (click)="deleteProject(proj.id)" class="btn btn-danger align-right mx-1"><i class="bi bi-trash3"></i></a>
         </div>
       </div>
     </div>
 
     <div id="collapseOne" [ngClass]="{ 'show': isOpened[i], 'collapse': !isOpened[i] }" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body rounded-3">
-        <p>{{proj.description}}</p>
-        <p>{{proj.status}}</p>
-        <div class="my-3"> Зібрано {{ proj.investedMoney }} з {{proj.requiredMoney}} </div>
-        <div class="progress">
-          <div class="progress-bar bg-success"  [ngStyle]="{ 'width': proj.investedMoney / proj.requiredMoney * 100 + '%' }">
+        <div class="row" *ngIf="proj.status === 'Draft'">
+          <div class="col">
+            <h4 class="text-center">Створити новий етап</h4>
+              <form [formGroup]="form">
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <input type="text" placeholder="Назва етапу" formControlName="tierName" class="form-control form-control-lg" />
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <input type="number" placeholder="Необхідна сума" formControlName="requiredMoney" class="form-control form-control-lg" />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="d-flex align-items-center">
+                    <div class="form-outline datepicker w-100">
+                      <input type="text" placeholder="Бенефіт" formControlName="benefit" class="form-control form-control-lg" />
+                    </div>
+                  </div>
+                </div>
+            <div class="mt-4 pt-2 text-center">
+              <button class="btn btn-success btn-lg" type="submit" value="Submit" (click)="createTier(proj.id)">Створити</button>
+          </div>
+            </form>
+          </div>
+        </div>
+        <div class="bg-secondary rounded-3">
+          <div class="my-3 pt-2">
+             <p class="text-center">Зібрано {{ proj.investedMoney }} з {{proj.requiredMoney}}</p> 
+          </div>
+          <div class="progress mx-3">
+            <div class="progress-bar bg-success" [ngStyle]="{ 'width': proj.investedMoney / proj.requiredMoney * 100 + '%' }">
+              <ng-container *ngFor="let tier of proj.tiers">
+                <span class="progress-tier" [ngStyle]="{ 'left': tier.requiredMoney / proj.requiredMoney * 100 + '%' }"></span>
+              </ng-container>
+            </div>
+          </div>
+          <mat-horizontal-stepper linear class="bg-secondary rounded-3">
+            <mat-step *ngFor="let tier of proj.tiers" [completed]="tier.isReached">
+              <ng-template matStepLabel>
+                {{ tier.tierName }}
+              </ng-template>
+              <div class="row">
+                <div class="col-6">
+                  <p>Бонус - {{ tier.benefit }}</p>
+                  <p>Необхідна сума - {{ tier.requiredMoney }}</p>
+                </div>
+                <div *ngIf="proj.status === 'Draft'" class="col text-end">
+                  <a (click)="deleteTier(tier.id)" class="btn btn-danger align-right mx-1"><i class="bi bi-trash3"></i></a>
+                </div>
+              </div>
+            </mat-step>
+          </mat-horizontal-stepper>
         </div>
       </div>
     </div>

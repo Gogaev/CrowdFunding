@@ -55,6 +55,7 @@ public static class ReinforcedTypingsConfiguration
                 $"{r.ResolveTypeName(t.GenericTypeArguments.First())} | null"));
         
         builder.Substitute(typeof(DateTime), new RtSimpleTypeName("Date"));
+        builder.Substitute(typeof(IFormFile), new RtSimpleTypeName(""));
         builder.Substitute(typeof(ActionResult), new RtSimpleTypeName("void"));
         builder.Substitute(typeof(IActionResult), new RtSimpleTypeName("void"));
         builder.Substitute(typeof(CancellationToken), new RtSimpleTypeName("unknown | null"));

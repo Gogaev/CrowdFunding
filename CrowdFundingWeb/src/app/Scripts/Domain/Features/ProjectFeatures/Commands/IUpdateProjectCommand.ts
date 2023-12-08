@@ -8,8 +8,6 @@ export interface IUpdateProjectCommand
 	title: string;
 	description: string;
 	imageUrl: string;
-	status: number;
 	lastDay: Date;
 	requiredMoney: number;
-	investedMoney: number;
 }

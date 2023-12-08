@@ -10,12 +10,13 @@ namespace Domain.DomainModels.Entities
         //public string ShortDescription { get; set;}
         //public string[] Images { get; set;}
         public string Description { get; set; } = "Draft Description";
-        public string ImageUrl { get; set; } = "";
+        public string TitleImage { get; set; } = "";
         public Status Status { get; set; }
         public DateTime StartingDay { get; set; }
         public DateTime? LastDay { get; set; }
         public decimal RequiredMoney { get; set; }
         public decimal InvestedMoney { get; set; }
+        public bool IsDeleted { get; set; } = false;
         public List<Tier> Tiers { get; set; } = new List<Tier>();
         public string? CreatorId { get; set; }
         public ApplicationUser? Creator { get; set; }

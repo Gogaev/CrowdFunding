@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IProjectWithTiersDto } from 'src/app/Scripts/Core/Dtos/Project/IProjectWithTiersDto';
 import { ProjectsApiService } from 'src/app/Scripts/CrowdFundingAPI/Controllers/ProjectsController';
+import { TiersApiService } from 'src/app/Scripts/CrowdFundingAPI/Controllers/TiersController';
 import { IPublishProjectCommand } from 'src/app/Scripts/Domain/Features/ProjectFeatures/Commands/IPublishProjectCommand';
 import { IGetAllCreatedProjectsQuery } from 'src/app/Scripts/Domain/Features/ProjectFeatures/Queries/IGetAllCreatedProjectsQuery';
+import { ICreateTierCommand } from 'src/app/Scripts/Domain/Features/TierFeature/Commands/ICreateTierCommand';
 
 @Component({
   selector: 'app-created-projects',
@@ -12,6 +15,7 @@ import { IGetAllCreatedProjectsQuery } from 'src/app/Scripts/Domain/Features/Pro
 })
 export class CreatedProjectsComponent implements OnInit {
   title = 'CrowdFundingWeb';
+  form: FormGroup;
   selectedOption: number = 4;
   projects: IProjectWithTiersDto[] = [];
   isOpened: boolean[] = [];
@@ -21,9 +25,23 @@ export class CreatedProjectsComponent implements OnInit {
   commandPublish: IPublishProjectCommand = {
     id: ''
   }
+  commandCreateTier: ICreateTierCommand = {
+    benefit: '',
+    projectId: '',
+    requiredMoney: 0,
+    tierName: ''
+  };
   
-  constructor(private projectService: ProjectsApiService, private router: Router){
+  constructor(private projectService: ProjectsApiService,
+     private router: Router,
+     private fb:FormBuilder,
+     private tierService: TiersApiService){
     this.isOpened = new Array(this.projects.length).fill(true);
+    this.form = this.fb.group({
+      tierName: ['',Validators.required],
+      benefit: ['',Validators.required],
+      requiredMoney: ['',Validators.required],
+    });
   }
   
   ngOnInit(): void {
@@ -72,6 +90,10 @@ export class CreatedProjectsComponent implements OnInit {
     this.router.navigate(['/create-project']);
   }
 
+  goToEditProject(id: string){
+    this.router.navigate(['/edit-project', id]);
+  }
+
   applyFilter(){
     this.projectService.getAllByUser(this.selectedOption).subscribe({
       next: response => this.projects = response,
@@ -82,7 +104,30 @@ export class CreatedProjectsComponent implements OnInit {
   }
 
   deleteProject(id: string){
-    this.projectService.delete(id).subscribe(
+    this.projectService.softDelete(id).subscribe(
+      (result) => {
+          console.log(result);
+          this.router.navigateByUrl('/');
+      }
+    );
+  }
+
+  createTier(id: string){
+    const val = this.form.value;
+    this.commandCreateTier.benefit = val.benefit;
+    this.commandCreateTier.requiredMoney = val.requiredMoney;
+    this.commandCreateTier.tierName = val.tierName;
+    this.commandCreateTier.projectId = id;
+    this.tierService.create(this.commandCreateTier).subscribe(
+      (result) => {
+        console.log(result);
+        this.router.navigateByUrl('my-projects');
+    }
+  );
+  }
+
+  deleteTier(id: string){
+    this.tierService.delete(id).subscribe(
       (result) => {
           console.log(result);
           this.router.navigateByUrl('/');

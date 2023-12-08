@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../_services/_tokenServices/token-storage.service';
 import { Router } from '@angular/router';
-import { ProjectsApiService } from '../Scripts/CrowdFundingAPI/Controllers/ProjectsController';
-import { IPublishedProjectDto } from '../Scripts/Core/Dtos/Project/IPublishedProjectDto';
+import { ProjectWithImage } from '../_models/project-image';
+import { GetProjetsService } from '../_services/projectServices/get-projets.service';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectAllProjects } from'../_state-management/selectors'
 
 @Component({
   selector: 'app-home',
@@ -11,20 +14,31 @@ import { IPublishedProjectDto } from '../Scripts/Core/Dtos/Project/IPublishedPro
 })
 export class HomeComponent implements OnInit {
   title = 'CrowdFundingWeb';
-  projects: IPublishedProjectDto[] = [];
+  projectsWithImages: ProjectWithImage[] = [];
+  projects$ = Observable<ProjectWithImage[]>;
   
-  constructor(private projectService: ProjectsApiService,
+  constructor(
      public tokenStorageService: TokenStorageService,
-      private router: Router){}
+     private projectImageService: GetProjetsService,
+     private readonly store: Store,
+     private router: Router){}
   
   ngOnInit(): void {
-    this.projectService.getAllPublished().subscribe({
-      next: response => this.projects = Object.values(response),
-      error: error => console.log(error),
-      complete: () => console.log('Request has completed') 
-    }
+    //this.projects$ = this.store.pipe(select(selectAllProjects));
+    this.loadProjectsWithImages();
+  }
+  
+  loadProjectsWithImages(): void {
+    this.projectImageService.getProjectsWithImages().subscribe(
+      (projectsWithImages: ProjectWithImage[]) => {
+        this.projectsWithImages = projectsWithImages;
+      },
+      (error: any) => {
+        console.error('An error occurred while fetching projects with images:', error);
+      }
     );
   }
+
   goToProjectDetails(id: string) {
     this.router.navigate(['/project-details', id]);
   }
@@ -33,3 +47,4 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/project-support', id]);
   }
 }
+

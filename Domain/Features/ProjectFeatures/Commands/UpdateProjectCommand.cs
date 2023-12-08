@@ -12,10 +12,8 @@ namespace Domain.Features.ProjectFeatures.Commands
         string Title,
         string Description,
         string ImageUrl,
-        Status Status,
         DateTime LastDay,
-        decimal RequiredMoney,
-        decimal InvestedMoney) : IRequest
+        decimal RequiredMoney) : IRequest
     {
         public class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand>
         {

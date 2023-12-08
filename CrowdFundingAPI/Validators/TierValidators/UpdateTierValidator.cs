@@ -9,10 +9,6 @@ namespace CrowdFundingAPI.Validators.TierValidators
         {
             RuleFor(x => x.Id)
                 .NotEmpty();
-            RuleFor(x => x.TierName)
-                .NotEmpty()
-                .Length(0, 20)
-                .WithMessage("Tier Name must be bugger than 0 and less then 20 symbols");
             RuleFor(x => x.RequiredMoney)
                 .NotEmpty()
                 .GreaterThan(0)
@@ -21,8 +17,6 @@ namespace CrowdFundingAPI.Validators.TierValidators
                 .NotEmpty()
                 .Length(0, 100)
                 .WithMessage("Tier Name must be bugger than 0 and less then 100 symbols");
-            RuleFor(x => x.ProjectId)
-                .NotEmpty();
         }
     }
 }

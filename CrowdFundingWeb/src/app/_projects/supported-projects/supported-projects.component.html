@@ -1,0 +1,33 @@
+<h1 class="text-center">
+    Supported Projects:
+</h1>
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="container">
+<div class="mt-5" *ngFor="let project of projects">
+      <div class="d-style btn btn-brc-tp border-2 bg-success btn-outline-blue btn-h-outline-blue btn-a-outline-blue w-100 my-2 py-3 shadow-sm">
+        <!-- Basic Plan -->
+        <div class="row align-items-center">
+          <div class="col-12 col-md-4">
+            <h4 class="pt-3 text-170 text-600 text-primary-d1 letter-spacing">
+              {{project.title}}
+            </h4>
+
+            <div class="text-secondary-d1 text-120">
+              Required money -  ${{project.requiredMoney}}
+            </div>
+          </div>
+
+          <p class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+            {{project.description}}
+          </p>
+
+          <div class="col-12 col-md-4 text-center">
+            <button (click)="goToProjectDetails(project.id)" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600">Деталі</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

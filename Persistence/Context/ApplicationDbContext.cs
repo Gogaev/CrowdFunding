@@ -37,5 +37,6 @@ namespace Persistence.Context
         public DbSet<Project> Projects { get; set; }
         public DbSet<Tier> Tiers { get; set; }
         public DbSet<ProjectUser> ProjectUsers { get; set; }
+        public DbSet<Image> Images { get; set; }
     }
 }
